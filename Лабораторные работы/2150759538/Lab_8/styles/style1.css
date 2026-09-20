@@ -1,0 +1,15 @@
+h1 {
+	text-align: center;
+}
+
+h1, h2 {
+	font-family: arial;
+	color: darkred;
+}
+
+p:not(:nth-of-type(1)) {
+	font-family: verdana;
+	border: 1px solid;
+	border-color: green;
+	background-color: aliceblue;
+}

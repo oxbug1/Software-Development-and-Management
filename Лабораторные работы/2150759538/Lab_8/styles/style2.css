@@ -1,0 +1,16 @@
+h1 {
+	color: royalblue;
+}
+
+img {
+	width: 200px;
+}
+
+img.cat {
+	border-bottom: 10px solid;
+	border-color: royalblue;
+}
+img.dog{
+	border: 5px solid;
+	border-color: violet;
+}
