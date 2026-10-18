@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UX/UI проектирование · Полный курс и глоссарий · 2026</title>
+<style>
+:root{
+  --bg:#0a0a0b;--bg-2:#0f0f12;--surface:#141418;--surface-2:#1a1a20;
+  --line:rgba(212,175,55,.16);--line-2:rgba(212,175,55,.34);
+  --gold:#d4af37;--gold-2:#e8cd7a;--gold-dim:#8a7326;
+  --text:#eae7e0;--muted:#96928a;
+  --ok:#5fbf8a;--warn:#d9a95f;--err:#d9705f;
+  --font-d:Georgia,'Times New Roman',serif;
+  --font-b:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--bg);color:var(--text);font-family:var(--font-b);
+  font-size:15.5px;line-height:1.7;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;padding:0 0 80px}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 500px at 12% -8%, rgba(212,175,55,.08), transparent 60%),
+             radial-gradient(700px 500px at 92% 8%, rgba(212,175,55,.05), transparent 60%)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+/* PROGRESS */
+#readbar{position:fixed;top:0;left:0;height:2px;width:0;
+  background:linear-gradient(90deg,var(--gold-dim),var(--gold),var(--gold-2));
+  z-index:100;transition:width .1s linear}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:90;background:rgba(10,10,11,.85);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line)}
+.nav{max-width:1000px;margin:0 auto;padding:0 28px;display:flex;
+  align-items:center;gap:24px;height:60px}
+.brand{font-family:var(--font-d);font-size:14px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold-2);white-space:nowrap;
+  display:flex;align-items:center;gap:10px;flex:none}
+.brand .dot{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);flex:none}
+.nav-links{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{color:var(--muted);text-decoration:none;white-space:nowrap;
+  padding:4px 0;border-bottom:1px solid transparent;transition:.25s}
+.nav-links a:hover{color:var(--gold-2);border-bottom-color:var(--line-2)}
+
+/* SECTIONS */
+section{padding:64px 0;border-bottom:1px solid var(--line);position:relative}
+section:last-of-type{border-bottom:none}
+.eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:14px}
+.eyebrow::after{content:'';height:1px;flex:1;max-width:120px;
+  background:linear-gradient(90deg,var(--line-2),transparent)}
+h1{font-family:var(--font-d);font-weight:400;font-size:clamp(2rem,5vw,3.4rem);
+  line-height:1.1;letter-spacing:-.02em;margin-bottom:20px}
+h1 em{font-style:italic;color:var(--gold-2)}
+h2{font-family:var(--font-d);font-weight:400;font-size:clamp(1.6rem,3.4vw,2.3rem);
+  line-height:1.15;letter-spacing:-.01em;margin-bottom:18px}
+h3{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:10px}
+h4{font-size:.82rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:12px}
+p{color:#cfcbc2;margin-bottom:14px}
+p.lead{font-size:1.05rem;color:#dedad2;max-width:70ch}
+.muted{color:var(--muted);font-size:.88rem}
+strong{color:var(--text);font-weight:600}
+code{background:var(--surface-2);border:1px solid var(--line);padding:1px 6px;
+  font-size:.85rem;color:var(--gold-2);font-family:var(--mono)}
+
+/* HERO */
+.hero{padding:90px 0 70px;border-bottom:1px solid var(--line)}
+.hero-sub{font-size:1.05rem;color:#c8c4bb;max-width:64ch;margin-bottom:30px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:30px;padding-top:26px;border-top:1px solid var(--line)}
+.hero-meta div .k{font-family:var(--font-d);font-size:1.6rem;color:var(--gold-2);line-height:1}
+.hero-meta div .v{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin-top:7px}
+
+/* HONEST */
+.honest{border:1px dashed var(--line-2);background:rgba(212,175,55,.03);
+  padding:20px 24px;margin:24px 0;font-size:.87rem;color:#b8b4ab;line-height:1.65}
+.honest b{color:var(--gold-2);font-weight:600;display:block;margin-bottom:6px;
+  letter-spacing:.02em}
+
+/* MODULE ACCORDION */
+.module{margin-bottom:26px;border:1px solid var(--line);background:var(--bg-2);
+  transition:.3s}
+.module:hover{border-color:var(--line-2)}
+.module-head{padding:22px 26px 18px;border-bottom:1px solid var(--line);
+  display:flex;align-items:baseline;gap:18px;cursor:pointer;user-select:none;
+  transition:.25s}
+.module-head:hover{background:var(--surface)}
+.module-head .num{font-family:var(--font-d);font-size:13px;letter-spacing:.2em;
+  color:var(--gold);flex:none;padding-top:3px}
+.module-head h2{font-family:var(--font-d);font-weight:400;font-size:1.25rem;
+  line-height:1.25;letter-spacing:-.01em;flex:1;margin:0}
+.module-head .toggle{width:13px;height:13px;position:relative;flex:none;align-self:center}
+.module-head .toggle::before,.module-head .toggle::after{content:'';position:absolute;
+  background:var(--gold);transition:.3s}
+.module-head .toggle::before{top:6px;left:0;width:13px;height:1px}
+.module-head .toggle::after{left:6px;top:0;width:1px;height:13px}
+.module.open .module-head .toggle::after{transform:scaleY(0)}
+.module-body{max-height:0;overflow:hidden;transition:max-height .5s ease}
+.module.open .module-body{max-height:20000px}
+.inner{padding:6px 26px 28px}
+
+/* TOPIC */
+.topic{padding:22px 0;border-bottom:1px solid rgba(212,175,55,.09)}
+.topic:last-child{border-bottom:none}
+.topic h3{font-size:.98rem;font-weight:600;margin-bottom:10px;
+  display:flex;gap:12px;align-items:baseline}
+.topic h3 .idx{font-family:var(--font-d);font-size:12px;color:var(--gold);
+  letter-spacing:.16em;flex:none}
+.topic p{font-size:.9rem;color:#c4c0b7;margin-bottom:10px}
+.topic ul{list-style:none;margin:10px 0}
+.topic ul li{position:relative;padding-left:20px;margin-bottom:8px;
+  font-size:.89rem;color:#c4c0b7}
+.topic ul li::before{content:'';position:absolute;left:0;top:10px;
+  width:6px;height:1px;background:var(--gold)}
+.sub{margin:14px 0 4px;padding-left:16px;border-left:1px solid var(--line)}
+.sub h4{font-size:.86rem;color:var(--gold-2);margin-bottom:8px;
+  letter-spacing:.01em;text-transform:none;font-weight:600}
+
+/* TABLE */
+.tbl{overflow-x:auto;border:1px solid var(--line);margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:480px}
+th{text-align:left;padding:11px 16px;background:var(--surface-2);font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+  border-bottom:1px solid var(--line-2);font-weight:600}
+td{padding:11px 16px;border-bottom:1px solid rgba(212,175,55,.08);
+  color:#c4c0b7;vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+
+/* CALLOUT */
+.callout{border-left:2px solid var(--gold);padding:14px 20px;margin:16px 0;
+  background:rgba(212,175,55,.035);font-size:.87rem;color:#c4c0b7;line-height:1.65}
+.callout b{color:var(--gold-2);font-weight:600}
+.callout.warn{border-left-color:var(--warn);background:rgba(217,169,95,.04)}
+.callout.warn b{color:var(--warn)}
+.callout.legal{border-left-color:var(--err);background:rgba(217,112,95,.04)}
+.callout.legal b{color:var(--err)}
+
+/* TOOL */
+.tool{border:1px solid var(--line-2);background:var(--bg-2);padding:26px;margin:20px 0}
+.tool-row{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;margin-bottom:22px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+input[type=color]{width:80px;height:42px;border:1px solid var(--line-2);
+  background:none;cursor:pointer;padding:3px}
+input[type=text],input[type=number],select{
+  background:var(--surface);border:1px solid var(--line-2);color:var(--text);
+  font-family:var(--font-b);font-size:.9rem;padding:10px 13px;outline:none;
+  transition:.2s;min-width:100px}
+input:focus,select:focus{border-color:var(--gold)}
+.contrast-preview{border:1px solid var(--line);padding:26px;margin-bottom:20px}
+.contrast-preview .big{font-size:1.5rem;margin-bottom:6px}
+.contrast-preview .small{font-size:.85rem}
+.ratio-display{font-family:var(--font-d);font-size:2.6rem;line-height:1;
+  color:var(--gold-2);margin-bottom:4px}
+.badges{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
+.badge{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  padding:6px 13px;border:1px solid var(--line-2);color:var(--muted)}
+.badge.pass{border-color:rgba(95,191,138,.5);color:var(--ok);background:rgba(95,191,138,.06)}
+.badge.fail{border-color:rgba(217,112,95,.4);color:var(--err);background:rgba(217,112,95,.05)}
+
+/* SCALE */
+.scale-out{display:flex;flex-direction:column;gap:0;margin-top:18px;
+  border-top:1px solid var(--line)}
+.scale-item{display:flex;justify-content:space-between;align-items:baseline;
+  gap:18px;padding:11px 0;border-bottom:1px solid rgba(212,175,55,.09)}
+.scale-item .lbl{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);flex:none;width:60px}
+.scale-item .sample{color:var(--text);flex:1;line-height:1.2;overflow:hidden;
+  white-space:nowrap;text-overflow:ellipsis}
+.scale-item .px{font-family:var(--font-d);color:var(--gold-2);font-size:.9rem;flex:none}
+
+/* QUIZ */
+.quiz{border:1px solid var(--line-2);background:var(--bg-2);padding:28px}
+.q{margin-bottom:26px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.q:last-of-type{border-bottom:none;margin-bottom:16px}
+.q-title{font-size:.95rem;font-weight:600;margin-bottom:14px;color:var(--text)}
+.q-title .qn{color:var(--gold);font-family:var(--font-d);margin-right:8px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:12px;align-items:flex-start;cursor:pointer;
+  border:1px solid var(--line);padding:12px 15px;transition:.2s;
+  font-size:.88rem;color:#c4c0b7}
+.opt:hover{border-color:var(--line-2);background:var(--surface)}
+.opt input{margin-top:5px;accent-color:var(--gold);flex:none}
+.opt.correct{border-color:rgba(95,191,138,.55);background:rgba(95,191,138,.07);color:var(--text)}
+.opt.wrong{border-color:rgba(217,112,95,.5);background:rgba(217,112,95,.06);color:var(--text)}
+.opt.locked{pointer-events:none}
+
+/* BUTTON */
+.btn{background:none;border:1px solid var(--gold);color:var(--gold-2);
+  font-family:var(--font-b);font-size:11.5px;letter-spacing:.16em;
+  text-transform:uppercase;padding:13px 28px;cursor:pointer;transition:.3s}
+.btn:hover{background:var(--gold);color:#0a0a0b}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.btn.ghost{border-color:var(--line-2);color:var(--muted)}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold-2);background:none}
+
+/* CHECKLIST */
+.check-item{display:flex;gap:14px;align-items:flex-start;padding:14px 18px;
+  border:1px solid var(--line);margin-bottom:-1px;cursor:pointer;
+  transition:.2s;background:var(--bg-2)}
+.check-item:hover{background:var(--surface)}
+.check-item input{margin-top:5px;accent-color:var(--gold);flex:none;
+  width:15px;height:15px}
+.check-item.done{opacity:.45}
+.check-item.done .ct{text-decoration:line-through;text-decoration-color:var(--gold-dim)}
+.ct{font-size:.89rem;color:#c6c2b9}
+.ct small{display:block;color:var(--muted);font-size:.77rem;margin-top:4px}
+.progress-wrap{margin:22px 0 26px}
+.progress-top{display:flex;justify-content:space-between;font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.progress-track{height:2px;background:rgba(212,175,55,.12);position:relative;overflow:hidden}
+.progress-fill{height:100%;width:0;
+  background:linear-gradient(90deg,var(--gold-dim),var(--gold-2));transition:width .4s ease}
+
+/* GLOSSARY SEARCH */
+.search-bar{position:sticky;top:60px;z-index:80;
+  background:rgba(10,10,11,.94);backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:0 -28px 26px;padding-left:28px;padding-right:28px}
+.search-input-wrap{position:relative;margin-bottom:12px}
+.search-input{width:100%;background:var(--surface);border:1px solid var(--line-2);
+  color:var(--text);font-family:var(--font-b);font-size:.92rem;
+  padding:12px 42px 12px 15px;outline:none;transition:.2s}
+.search-input:focus{border-color:var(--gold)}
+.search-input::placeholder{color:var(--muted)}
+.search-clear{position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--muted);cursor:pointer;font-size:15px;
+  display:none;padding:4px}
+.search-clear.visible{display:block}
+.search-clear:hover{color:var(--gold-2)}
+.cats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.cat-btn{background:none;border:1px solid var(--line);color:var(--muted);
+  font-family:var(--font-b);font-size:10.5px;letter-spacing:.09em;
+  text-transform:uppercase;padding:6px 12px;cursor:pointer;transition:.2s}
+.cat-btn:hover{color:var(--gold-2);border-color:var(--line-2)}
+.cat-btn.active{background:var(--gold);color:#0a0a0b;border-color:var(--gold)}
+.counter{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+
+/* GLOSSARY TERM */
+.sec-head{display:flex;align-items:baseline;gap:14px;margin:28px 0 16px;
+  padding-bottom:10px;border-bottom:1px solid var(--line)}
+.sec-head .num{font-family:var(--font-d);font-size:11px;letter-spacing:.2em;
+  color:var(--gold);flex:none}
+.sec-head h3{font-family:var(--font-d);font-weight:400;font-size:1.15rem;
+  letter-spacing:-.01em;flex:1;margin:0}
+.sec-head .count{font-size:11px;color:var(--muted);letter-spacing:.1em}
+.term{padding:16px 0;border-bottom:1px solid rgba(212,175,55,.09);
+  display:grid;grid-template-columns:200px 1fr;gap:22px;align-items:start}
+.term:last-child{border-bottom:none}
+.term .word{font-size:.94rem;font-weight:600;color:var(--gold-2);line-height:1.35}
+.term .word small{display:block;font-size:10.5px;font-weight:400;color:var(--muted);
+  letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+.term .def{font-size:.88rem;color:#c4c0b7;line-height:1.65}
+.empty{text-align:center;padding:50px 20px;color:var(--muted);font-size:.9rem;
+  border:1px dashed var(--line);display:none}
+.empty.visible{display:block}
+
+/* STATUS */
+.st{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 8px;border:1px solid;white-space:nowrap}
+.st.ok{color:var(--ok);border-color:rgba(95,191,138,.45);background:rgba(95,191,138,.06)}
+.st.warn{color:var(--warn);border-color:rgba(217,169,95,.4);background:rgba(217,169,95,.05)}
+.st.chk{color:var(--muted);border-color:var(--line-2)}
+
+/* RESOURCES */
+.res-list{list-style:none}
+.res-list li{padding:13px 0;border-bottom:1px solid rgba(212,175,55,.09);
+  display:flex;gap:16px;align-items:baseline;font-size:.88rem}
+.res-list li:last-child{border-bottom:none}
+.res-list .cat{font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold-dim);flex:none;width:120px}
+.res-list .val{color:#c4c0b7}
+
+/* FOOTER */
+footer{padding:50px 0 60px;border-top:1px solid var(--line)}
+.foot-grid{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;
+  align-items:flex-start}
+footer p{font-size:.8rem;color:var(--muted);max-width:62ch;margin:0}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);
+  transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .wrap{padding:0 18px}
+  .nav{padding:0 18px;gap:14px}
+  .hero{padding:60px 0 50px}
+  .module-head{padding:18px 20px;gap:12px}
+  .module-head h2{font-size:1.08rem}
+  .inner{padding:4px 20px 22px}
+  .topic h3{font-size:.94rem}
+  .term{grid-template-columns:1fr;gap:6px;padding:14px 0}
+  .search-bar{margin:0 -18px 22px;padding-left:18px;padding-right:18px}
+  section{padding:50px 0}
+}
+</style>
+</head>
+<body>
+
+<div id="readbar"></div>
+
+<header>
+  <nav class="nav">
+    <div class="brand"><span class="dot"></span>UX/UI · 2026</div>
+    <div class="nav-links">
+      <a href="#about">О курсе</a>
+      <a href="#m1">Контекст</a>
+      <a href="#m2">Исследования</a>
+      <a href="#m3">ИА</a>
+      <a href="#m4">Тестирование</a>
+      <a href="#m5">UI-дизайн</a>
+      <a href="#m6">Прототипы</a>
+      <a href="#m7">Дизайн-системы</a>
+      <a href="#m8">Проект</a>
+      <a href="#tools">Инструменты</a>
+      <a href="#quiz">Квиз</a>
+      <a href="#glossary">Глоссарий</a>
+      <a href="#verify">Проверка</a>
+      <a href="#resources">Ресурсы</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow">Полный курс · Теория · Глоссарий · 2026</div>
+    <h1>Проектирование<br>интерфейсов <em>пользователя</em></h1>
+    <p class="hero-sub">Учебное пособие для будущих разработчиков веб- и
+      мультимедийных приложений и дизайнеров интерфейсов. Девять модулей теории,
+      интерактивные инструменты, глоссарий из 92 терминов и таблица
+      перепроверки — в одном файле.</p>
+    <div class="hero-meta">
+      <div><div class="k">9</div><div class="v">Модулей</div></div>
+      <div><div class="k">92</div><div class="v">Термина</div></div>
+      <div><div class="k">32</div><div class="v">Проверки</div></div>
+      <div><div class="k">AA</div><div class="v">Уровень WCAG</div></div>
+    </div>
+    <div class="honest" style="margin-top:30px">
+      <b>О достоверности данных</b>
+      Материал опирается на устойчивые, проверяемые источники: W3C, ГОСТ, федеральные
+      законы РФ, публичную документацию российских дизайн-систем. Я не привожу новости
+      и статистику за октябрь 2026 года, поскольку не могу их достоверно подтвердить.
+      Там, где стоит пометка «проверьте актуальную редакцию», это значит: откройте
+      первоисточник на официальном ресурсе перед использованием в работе.
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="wrap reveal">
+    <div class="eyebrow">01 · О курсе</div>
+    <h2>Как устроено пособие</h2>
+    <p class="lead">Курс построен по модели человеко-ориентированного проектирования
+      (ГОСТ Р ИСО 9241-210-2016) и охватывает полный цикл: от исследования
+      до передачи макета в разработку и замера результата.</p>
+    <div class="tbl" style="margin-top:24px">
+      <table>
+        <thead><tr><th>Раздел</th><th>Содержание</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Модули I–III</strong></td><td>Контекст 2026, UX-исследования, информационная архитектура</td></tr>
+          <tr><td><strong>Модули IV–VI</strong></td><td>UX-тестирование, основы UI-дизайна, прототипирование</td></tr>
+          <tr><td><strong>Модули VII–VIII</strong></td><td>Дизайн-системы, интерактивность, индивидуальный проект</td></tr>
+          <tr><td><strong>Инструменты</strong></td><td>Проверка контраста, калькулятор типографической шкалы, квиз, чек-лист</td></tr>
+          <tr><td><strong>Глоссарий</strong></td><td>92 термина в 10 категориях с поиском и фильтром</td></tr>
+          <tr><td><strong>Перепроверка</strong></td><td>32 утверждения со статусами «подтверждено / проверить / контекст»</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <b>Как учиться.</b> Каждый модуль заканчивается практическим заданием
+      (см. модуль VIII). Интерактивные инструменты сохраняют прогресс в браузере.
+      Работайте последовательно: результат предыдущего модуля становится входом
+      для следующего.
+    </div>
+  </div>
+</section>
+
+<!-- ============ M1 ============ -->
+<section id="m1">
+  <div class="wrap reveal">
+    <div class="eyebrow">02 · Модуль I</div>
+    <h2>Контекст 2026: в каких условиях работает дизайнер интерфейсов в России</h2>
+
+    <div class="module open">
+      <div class="module-head">
+        <span class="num">I.1</span>
+        <h2>Инструментальный ландшафт и регулирование</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <h3><span class="idx">01</span>Инструменты</h3>
+          <p>После того как в 2022 году Figma ограничила доступ для российских
+            организаций, рынок перестроился. В работе используются <strong>Pixso</strong>,
+            <strong>Penpot</strong> (открытый исходный код), <strong>Framer</strong>,
+            а также отечественные и азиатские решения.</p>
+          <p>Для анимации прототипов — <strong>Rive</strong> и <strong>Lottie</strong>,
+            для 3D-сцен — <strong>Spline</strong>. Код-ориентированные дизайнеры
+            всё чаще работают прямо в репозитории.</p>
+        </div>
+        <div class="topic">
+          <h3><span class="idx">02</span>Регулирование данных</h3>
+          <p>Федеральный закон <strong>№ 152-ФЗ «О персональных данных»</strong>
+            определяет, какие данные можно собирать и как оформлять согласие.
+            С <strong>30 мая 2025 года</strong> действуют поправки, внесённые
+            <strong>ФЗ № 420-ФЗ от 30.11.2024</strong> — они существенно повысили
+            ответственность за нарушения.</p>
+          <div class="callout legal">
+            <b>Практический вывод.</b> Формы, cookie-баннеры, согласия и онбординг —
+            это не «юридическая часть», а часть интерфейса, которую проектируете вы.
+          </div>
+        </div>
+        <div class="topic">
+          <h3><span class="idx">03</span>Доступность как требование</h3>
+          <p>Действует <strong>ГОСТ Р 52872-2019</strong> — национальный стандарт
+            доступности интернет-ресурсов и приложений. Международный ориентир —
+            <strong>WCAG 2.2</strong> от W3C (опубликован в октябре 2023).</p>
+          <p>По оценкам ВОЗ, более 1,3 млрд человек в мире живут со значимыми формами
+            инвалидности. Доступность — базовое качество продукта, а не «для меньшинства».</p>
+        </div>
+        <div class="topic">
+          <h3><span class="idx">04</span>Отечественные ИИ-модели</h3>
+          <p>В рабочих процессах используются <strong>GigaChat</strong> (Сбер) и
+            <strong>YandexGPT</strong> (Яндекс) для генерации UX-текстов и
+            суммаризации исследований, <strong>Kandinsky</strong> (Сбер) и
+            <strong>Шедеврум</strong> (Яндекс) — для визуальных концептов.</p>
+          <p>Ключевой навык — не «промптить», а <strong>встраивать ИИ в сценарий
+            пользователя</strong> так, чтобы он был предсказуем и объясним.</p>
+        </div>
+      </div></div>
+    </div>
+
+    <h3 style="margin-top:26px">Что изменилось в профессии: сравнение</h3>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Область</th><th>Ориентир 2020</th><th>Реальность</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Редактор</strong></td><td>Figma как монополия</td><td>Мультиредакторность: Pixso, Penpot, Framer, локальные сборки</td></tr>
+          <tr><td><strong>Роль ИИ</strong></td><td>Эксперимент</td><td>Встроенный ассистент в интерфейсе продукта</td></tr>
+          <tr><td><strong>Доступность</strong></td><td>По желанию заказчика</td><td>Требование ГОСТ и ожидание пользователей</td></tr>
+          <tr><td><strong>Передача в разработку</strong></td><td>Макеты «на глаз»</td><td>Дизайн-токены, код-ревью макетов, автоматизация</td></tr>
+          <tr><td><strong>Метрика успеха</strong></td><td>«Красиво / некрасиво»</td><td>Task Success Rate, конверсия, SUS, доступность</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ M2 ============ -->
+<section id="m2">
+  <div class="wrap reveal">
+    <div class="eyebrow">03 · Модуль II</div>
+    <h2>UX-исследования</h2>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">II.1</span>
+        <h2>Методы UX-исследований</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <p>Исследования делятся на <strong>качественные</strong> (отвечают на «почему»,
+            малая выборка, глубокое погружение) и <strong>количественные</strong>
+            (отвечают на «сколько», большая выборка, статистика).</p>
+          <div class="tbl">
+            <table>
+              <thead><tr><th>Метод</th><th>Тип</th><th>Когда применять</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Глубинное интервью</strong></td><td>Качественный</td><td>Понять мотивацию, барьеры, контекст. Вопросы о прошлом опыте</td></tr>
+                <tr><td><strong>Опрос / анкета</strong></td><td>Количественный</td><td>Проверить гипотезу на большой выборке</td></tr>
+                <tr><td><strong>Наблюдение</strong></td><td>Качественный</td><td>Увидеть реальное поведение, а не то, что о нём рассказывают</td></tr>
+                <tr><td><strong>Дневниковое исследование</strong></td><td>Качественный</td><td>Длительное поведение, привычки за недели</td></tr>
+                <tr><td><strong>Аналитика</strong></td><td>Количественный</td><td>Воронки, точки отвала, тепловые карты</td></tr>
+                <tr><td><strong>Анализ конкурентов</strong></td><td>Смешанный</td><td>Паттерны и отличия, не для копирования</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout legal">
+            <b>152-ФЗ.</b> Любые персональные данные респондента (имя, контакты,
+            запись голоса и видео) — это обработка персональных данных. Нужно
+            информированное согласие, минимизация собираемых данных, безопасное
+            хранение и срок удаления. Поправки 420-ФЗ от 30.11.2024 повысили
+            ответственность за нарушения.
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">II.2</span>
+        <h2>Проведение UX-исследования: анкета и сбор данных</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <h3><span class="idx">01</span>Правила составления анкеты</h3>
+          <ul>
+            <li><strong>Один вопрос — одна мысль.</strong> Не совмещайте «удобно и быстро» в одном вопросе.</li>
+            <li><strong>Понятный язык.</strong> Без профессионального жаргона, без двойных отрицаний.</li>
+            <li><strong>Нейтральные формулировки.</strong> Избегайте наводящих и оценочных слов.</li>
+            <li><strong>Логичный порядок.</strong> От общего к частному, чувствительные — в конце.</li>
+            <li><strong>Шкалы.</strong> Likert (5 или 7 точек), NPS (0–10).</li>
+            <li><strong>Пилот.</strong> Прогоните анкету на 2–3 людях до запуска.</li>
+          </ul>
+          <p>Для качественного исследования <strong>5–10 респондентов</strong> достаточно,
+            чтобы выявить большинство проблем: по правилу Якоба Нильсена, пять
+            участников находят около 85% проблем юзабилити.</p>
+        </div>
+        <div class="topic">
+          <h3><span class="idx">02</span>Инструменты, доступные в РФ</h3>
+          <ul>
+            <li><strong>Яндекс Формы</strong> — конструктор опросов.</li>
+            <li><strong>Testograf</strong> — российская платформа для опросов и панельных исследований.</li>
+            <li><strong>Anketolog</strong> — российская платформа с панелью респондентов.</li>
+            <li><strong>Яндекс Метрика, AppMetrica</strong> — продуктовая аналитика.</li>
+          </ul>
+        </div>
+        <div class="topic">
+          <h3><span class="idx">03</span>Синтез результатов</h3>
+          <p>Сырые данные превращаются в артефакты: <strong>JTBD-утверждения</strong>
+            («Когда… я хочу… чтобы…»), <strong>персоны</strong> (на основе реальных
+            паттернов), <strong>CJM</strong> (Customer Journey Map) с точками
+            контакта, эмоциями и барьерами.</p>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ M3 ============ -->
+<section id="m3">
+  <div class="wrap reveal">
+    <div class="eyebrow">04 · Модуль III</div>
+    <h2>Информационная архитектура</h2>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">III.1</span>
+        <h2>Организация контента для всех платформ</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <p><strong>Информационная архитектура (ИА)</strong> — структура контента
+            и навигации. Термин популяризировали Ричард Сол Вурман и Луис Розенфельд.</p>
+          <div class="sub">
+            <h4>Четыре компонента ИА</h4>
+            <ul>
+              <li><strong>Организация</strong> — как сгруппирован контент.</li>
+              <li><strong>Навигация</strong> — как перемещаться между разделами.</li>
+              <li><strong>Маркировка</strong> — как называются разделы.</li>
+              <li><strong>Поиск</strong> — как найти конкретное.</li>
+            </ul>
+          </div>
+          <p>ИА проектируется <strong>один раз</strong>, а затем адаптируется под
+            каждый экран. На десктопе — боковое меню и «хлебные крошки», на планшете —
+            выдвижная панель, на смартфоне — нижняя таб-навигация или «бургер».</p>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">III.2</span>
+        <h2>Карточная сортировка</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <p>Метод, при котором пользователи группируют карточки с названиями
+            разделов. Позволяет увидеть <strong>ментальную модель</strong> аудитории.</p>
+          <div class="sub">
+            <h4>Виды сортировки</h4>
+            <ul>
+              <li><strong>Открытая</strong> — участники сами придумывают названия групп.</li>
+              <li><strong>Закрытая</strong> — группы заданы заранее.</li>
+              <li><strong>Гибридная</strong> — группы заданы, но можно создавать свои.</li>
+            </ul>
+          </div>
+          <p>Результат — <strong>дендрограмма</strong> (диаграмма схожести) и список
+            предложенных названий. Минимум: 15–20 участников в количественной
+            сортировке и 5–10 — в качественной.</p>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">III.3</span>
+        <h2>Карта сайта и схема навигации</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <p><strong>Карта сайта (sitemap)</strong> — иерархическая схема всех страниц
+            и разделов. <strong>Схема навигации</strong> — связи между ними.</p>
+          <div class="sub">
+            <h4>Типовые паттерны навигации</h4>
+            <ul>
+              <li><strong>Десктоп:</strong> верхнее меню, боковая панель, «хлебные крошки», поиск в шапке.</li>
+              <li><strong>Планшет:</strong> выдвижное меню (off-canvas), разделённый экран (master-detail), вкладки.</li>
+              <li><strong>Смартфон:</strong> нижняя таб-навигация (до 5 пунктов), «бургер», жесты, FAB.</li>
+            </ul>
+          </div>
+          <div class="callout warn">
+            <b>Правило трёх кликов</b> — спорная эвристика. Не имеет строгого
+            научного подтверждения, применяется как ориентир, а не закон.
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ M4 ============ -->
+<section id="m4">
+  <div class="wrap reveal">
+    <div class="eyebrow">05 · Модуль IV</div>
+    <h2>UX-тестирование</h2>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">IV.1</span>
+        <h2>Основы тестирования: виды и метрики</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <div class="tbl">
+            <table>
+              <thead><tr><th>Тип</th><th>Плюсы</th><th>Минусы</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Модерируемый</strong></td><td>Глубина, можно уточнять, видеть невербальные реакции</td><td>Дорого, долго, эффект ведущего</td></tr>
+                <tr><td><strong>Немодерируемый</strong></td><td>Быстро, дёшево, много участников, естественная среда</td><td>Нет уточнений, участники бросают, сбои</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="sub">
+            <h4>Ключевые метрики</h4>
+            <ul>
+              <li><strong>Task Success Rate</strong> — доля успешно выполненных задач.</li>
+              <li><strong>Time on Task</strong> — время выполнения.</li>
+              <li><strong>Error Rate</strong> — частота и характер ошибок.</li>
+              <li><strong>SUS</strong> — 10 вопросов, балл 0–100. Автор — Джон Брук (1986). Средний результат около 68.</li>
+              <li><strong>NPS</strong> — готовность рекомендовать (0–10). Автор — Фред Райхельд.</li>
+              <li><strong>SEQ</strong> — один вопрос: «Насколько легко было?» (1–7).</li>
+            </ul>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">IV.2</span>
+        <h2>Тест десктопной версии</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <div class="sub">
+            <h4>Структура сессии</h4>
+            <ul>
+              <li><strong>Приветствие и согласие</strong> — тестируется продукт, а не участник.</li>
+              <li><strong>Разогревающие вопросы</strong> — снять напряжение.</li>
+              <li><strong>Сценарий</strong> — 3–5 задач как цель, а не инструкция.</li>
+              <li><strong>Техника «думайте вслух»</strong> — участник проговаривает мысли.</li>
+              <li><strong>Пост-интервью</strong> — SEQ, SUS, открытые вопросы.</li>
+            </ul>
+          </div>
+          <div class="callout">
+            <b>Правило наблюдателя.</b> Не подсказывать, не защищать продукт,
+            не оправдываться. Ваша задача — фиксировать.
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">IV.3</span>
+        <h2>Тест мобильной версии</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <ul>
+            <li><strong>Контекст использования.</strong> Человек может тестировать на ходу, одной рукой.</li>
+            <li><strong>Жесты.</strong> Свайп, тап, long-press, pinch. Наблюдайте, какие жесты пробует участник.</li>
+            <li><strong>Зоны касания.</strong> WCAG 2.2 AA — 24×24 CSS px; AAA — 44×44. Apple HIG — 44×44 pt, Material Design — 48×48 dp.</li>
+            <li><strong>Запись экрана.</strong> Встроенные средства iOS и Android фиксируют касания.</li>
+          </ul>
+          <div class="callout warn">
+            <b>Осторожно с эмуляторами.</b> Жесты, тактильный отклик, реальные размеры
+            зон касания лучше проверять на физических устройствах.
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ M5 ============ -->
+<section id="m5">
+  <div class="wrap reveal">
+    <div class="eyebrow">06 · Модуль V</div>
+    <h2>Основы UI-дизайна</h2>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">V.1</span>
+        <h2>Композиция, иерархия, баланс</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <div class="sub">
+            <h4>Сетки</h4>
+            <p><strong>8-pt система</strong> — все отступы и размеры кратны 8 (или 4).
+              В вебе — 12-колоночная сетка, в мобильных — 4-колоночная.</p>
+          </div>
+          <div class="sub">
+            <h4>Визуальная иерархия</h4>
+            <p>Способы: размер, вес, цвет, контраст, пространство, позиция.
+              Проверка: прищурьтесь на макет — если иерархия видна, она работает.</p>
+          </div>
+          <div class="sub">
+            <h4>Баланс</h4>
+            <p><strong>Симметричный</strong> — строгий, формальный.
+              <strong>Асимметричный</strong> — динамичный.</p>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">V.2</span>
+        <h2>Типографика в UI</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <p>Для интерфейсов предпочтительны шрифты с хорошим <strong>x-height</strong>.
+            В вебе используются: <strong>Inter</strong>, <strong>Manrope</strong>,
+            <strong>IBM Plex Sans</strong>, <strong>Golos Text</strong> (российский
+            шрифт от Paratype), <strong>Suisse Int'l</strong>.</p>
+          <ul>
+            <li><strong>Размеры</strong> — из базового (16px) и коэффициента: 1.125, 1.25, 1.333, 1.618.</li>
+            <li><strong>Интерлиньяж</strong> — 1.5–1.6 для основного текста, 1.1–1.3 для заголовков.</li>
+            <li><strong>Длина строки</strong> — 45–75 символов.</li>
+          </ul>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">V.3</span>
+        <h2>Цветовая теория в UI</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <div class="sub">
+            <h4>OKLCH</h4>
+            <p>Перцептуально равномерное пространство (CSS Color Module Level 4).
+              Изменяя светлоту L, вы получаете предсказуемые оттенки.</p>
+          </div>
+          <div class="sub">
+            <h4>Роли цвета</h4>
+            <p>В зрелых системах: <code>action</code>, <code>danger</code>,
+              <code>success</code>, <code>surface</code>, <code>border</code>,
+              <code>text-primary</code>.</p>
+          </div>
+          <div class="sub">
+            <h4>Контраст (WCAG 2.2 AA)</h4>
+            <p><strong>4.5:1</strong> для обычного текста, <strong>3:1</strong> для
+              крупного (от 24px или 18.66px bold) и нетекстовых элементов.</p>
+          </div>
+          <div class="sub">
+            <h4>Психология цвета</h4>
+            <p>Красный — опасность, зелёный — успех, синий — доверие, жёлтый — внимание.</p>
+          </div>
+          <div class="callout warn">
+            <b>Про APCA.</b> Обсуждается альтернативный метод <strong>APCA</strong>
+            (Accessible Perceptual Contrast Algorithm, автор — Эндрю Сомерс).
+            На 2026 год нормативным остаётся WCAG.
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ M6 ============ -->
+<section id="m6">
+  <div class="wrap reveal">
+    <div class="eyebrow">07 · Модуль VI</div>
+    <h2>Прототипирование</h2>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">VI.1–2</span>
+        <h2>Низкодетализированные прототипы</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <p><strong>Wireframe</strong> — схема экрана без визуального дизайна.</p>
+          <ul>
+            <li>Начинайте с <strong>paper sketching</strong>.</li>
+            <li>Переходите к цифре после того, как логика устоялась.</li>
+            <li>Не тратьте время на цвет и шрифт.</li>
+            <li>Фиксируйте все состояния: пустое, загрузка, ошибка, успех.</li>
+          </ul>
+          <div class="sub">
+            <h4>Подходы к адаптации</h4>
+            <ul>
+              <li><strong>Mobile-first</strong> — сначала мобильная версия.</li>
+              <li><strong>Desktop-first</strong> — если продукт преимущественно десктопный.</li>
+              <li><strong>Content-first</strong> — отталкиваемся от контента.</li>
+            </ul>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">VI.3–4</span>
+        <h2>Высокодетализированные прототипы</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <ul>
+            <li>Все интерактивные элементы имеют состояния: default, hover, focus, active, disabled, loading, error.</li>
+            <li>Отступы и размеры — по 8-pt системе и дизайн-токенам.</li>
+            <li>Тексты — реальные, не «Lorem ipsum».</li>
+            <li>Адаптивность описана для ключевых разрешений.</li>
+          </ul>
+          <div class="sub">
+            <h4>Особенности экранов меньшего размера</h4>
+            <ul>
+              <li><strong>Зоны касания</strong> — минимум 44×44 pt (iOS) / 48×48 dp (Android); WCAG 2.2 AA — 24×24 CSS px.</li>
+              <li><strong>Плотность интерфейса</strong> — меньше элементов, крупнее шрифт, больше «воздуха».</li>
+              <li><strong>Safe area</strong> — учёт «челки» и системных жестов.</li>
+              <li><strong>Типографика</strong> — минимум 16px для полей ввода (иначе iOS зумит).</li>
+            </ul>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ M7 ============ -->
+<section id="m7">
+  <div class="wrap reveal">
+    <div class="eyebrow">08 · Модуль VII</div>
+    <h2>Дизайн-система и интерактивность</h2>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">VII.1</span>
+        <h2>Разработка дизайн-системы</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <div class="sub">
+            <h4>Три уровня абстракции</h4>
+            <ul>
+              <li><strong>Токены</strong> — именованные значения. Формат обмена — спецификация <strong>W3C Design Tokens Community Group</strong>.</li>
+              <li><strong>Компоненты</strong> — кнопка, поле, модальное окно.</li>
+              <li><strong>Паттерны</strong> — правила композиции.</li>
+            </ul>
+          </div>
+          <div class="sub">
+            <h4>Российские дизайн-системы</h4>
+            <div class="tbl">
+              <table>
+                <thead><tr><th>Система</th><th>Компания</th><th>Особенность</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Гвоздь</strong></td><td>Яндекс</td><td>Поиск, Карты, Такси, Маркет</td></tr>
+                  <tr><td><strong>VKUI</strong></td><td>VK</td><td>Открытая React-библиотека, VK Mini Apps</td></tr>
+                  <tr><td><strong>Bi-Design</strong></td><td>Сбер</td><td>Продукты экосистемы</td></tr>
+                  <tr><td><strong>Alfa Design System</strong></td><td>Альфа-Банк</td><td>Публичные гайдлайны и токены</td></tr>
+                  <tr><td><strong>T-Bank Design System</strong></td><td>Т-Банк</td><td>Финансовые паттерны</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="callout warn">
+            <b>Проверьте актуальность.</b> Состав и публичная доступность этих
+            систем меняются. Откройте официальную документацию перед занятием.
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">VII.2</span>
+        <h2>Микроинтеракции</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <p>Модель <strong>Дэна Сэффера</strong> (книга «Microinteractions», 2013):
+            триггер → правила → обратная связь → циклы и режимы.</p>
+          <div class="sub">
+            <h4>Длительности анимации</h4>
+            <ul>
+              <li><strong>100–150 мс</strong> — отклик на нажатие.</li>
+              <li><strong>200–300 мс</strong> — появление панели, тултипа.</li>
+              <li><strong>400+ мс</strong> — переход между экранами.</li>
+              <li><strong>Easing:</strong> <code>ease-out</code> для входа, <code>ease-in</code> для выхода.</li>
+            </ul>
+          </div>
+          <div class="callout">
+            <b>Принцип.</b> Анимация объясняет изменение состояния, а не украшает.
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">VII.3–5</span>
+        <h2>Прототипирование интерактивности и мобильных жестов</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <div class="sub">
+            <h4>Жесты</h4>
+            <ul>
+              <li><strong>Tap</strong> — основное действие.</li>
+              <li><strong>Swipe</strong> — горизонтальный или вертикальный.</li>
+              <li><strong>Long-press</strong> — контекстное меню.</li>
+              <li><strong>Pinch</strong> — зум.</li>
+              <li><strong>Drag</strong> — перемещение.</li>
+            </ul>
+          </div>
+          <div class="sub">
+            <h4>Тактильный фидбек</h4>
+            <p>Короткая вибрация подтверждает действие. Дополняет визуальную
+              обратную связь, не заменяет её.</p>
+          </div>
+          <div class="callout warn">
+            <b>Ограничение.</b> Жесты должны быть <strong>обнаружимы</strong>.
+            Добавляйте визуальные подсказки при первом запуске.
+          </div>
+          <div class="sub">
+            <h4>Инструменты</h4>
+            <ul>
+              <li><strong>Figma, Pixso, Framer, Penpot</strong> — hi-fi прототипы.</li>
+              <li><strong>Rive, Lottie</strong> — анимация.</li>
+              <li><strong>Spline</strong> — 3D.</li>
+            </ul>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ M8 ============ -->
+<section id="m8">
+  <div class="wrap reveal">
+    <div class="eyebrow">09 · Модуль VIII</div>
+    <h2>Индивидуальный проект</h2>
+
+    <div class="module">
+      <div class="module-head">
+        <span class="num">VIII</span>
+        <h2>Этапы работы и структура кейса</h2>
+        <span class="toggle"></span>
+      </div>
+      <div class="module-body"><div class="inner">
+        <div class="topic">
+          <h3><span class="idx">01</span>Этапы</h3>
+          <div class="tbl">
+            <table>
+              <thead><tr><th>Этап</th><th>Что делаем</th><th>Артефакты</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Бриф</strong></td><td>Формализуем задачу</td><td>Бриф, стейкхолдеры, метрики</td></tr>
+                <tr><td><strong>Исследование</strong></td><td>Интервью, аналитика, конкуренты</td><td>Инсайты, персоны, CJM</td></tr>
+                <tr><td><strong>Синтез</strong></td><td>Формулируем проблему</td><td>JTBD, гипотезы</td></tr>
+                <tr><td><strong>Проектирование</strong></td><td>ИА, прототипы, дизайн-система</td><td>Карта сайта, макеты, токены</td></tr>
+                <tr><td><strong>Тестирование</strong></td><td>Юзабилити-тесты, правки</td><td>Отчёт с метриками</td></tr>
+                <tr><td><strong>Передача</strong></td><td>Разработка, документация</td><td>Спецификации, компоненты</td></tr>
+                <tr><td><strong>Презентация</strong></td><td>Защита кейса</td><td>Презентация, портфолио</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="topic">
+          <h3><span class="idx">02</span>Структура кейса для защиты</h3>
+          <ul>
+            <li><strong>Контекст</strong> — задача, аудитория, ограничения.</li>
+            <li><strong>Исследование</strong> — что узнали, как это повлияло.</li>
+            <li><strong>Решение</strong> — ИА, дизайн-система, ключевые экраны.</li>
+            <li><strong>Проверка</strong> — как тестировали, что нашли, что исправили.</li>
+            <li><strong>Результат</strong> — метрики, выводы, что улучшить.</li>
+          </ul>
+          <p>Оценивается не только финальный макет, но и <strong>ход мысли</strong>:
+            как формулировали проблему, какие гипотезы проверяли, как реагировали
+            на данные.</p>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOOLS ============ -->
+<section id="tools">
+  <div class="wrap reveal">
+    <div class="eyebrow">10 · Интерактивные инструменты</div>
+    <h2>Примените теорию на практике</h2>
+
+    <h3 style="margin-top:30px">Проверка контраста по WCAG</h3>
+    <p class="muted">Выберите цвета текста и фона — калькулятор рассчитает
+      коэффициент контраста по формуле относительной яркости из спецификации WCAG.</p>
+
+    <div class="tool">
+      <div class="tool-row">
+        <div class="field">
+          <label for="fgColor">Цвет текста</label>
+          <input type="color" id="fgColor" value="#eae7e0">
+        </div>
+        <div class="field">
+          <label for="bgColor">Цвет фона</label>
+          <input type="color" id="bgColor" value="#0a0a0b">
+        </div>
+        <div class="field">
+          <label for="fontSize">Размер, px</label>
+          <input type="number" id="fontSize" value="16" min="8" max="72" step="1">
+        </div>
+        <div class="field">
+          <label for="fontWeight">Насыщенность</label>
+          <select id="fontWeight">
+            <option value="400" selected>400 — обычный</option>
+            <option value="700">700 — жирный</option>
+          </select>
+        </div>
+      </div>
+      <div class="contrast-preview" id="contrastPreview">
+        <div class="big" id="prevBig">Пример крупного текста</div>
+        <div class="small" id="prevSmall">Пример обычного текста для проверки читаемости</div>
+      </div>
+      <div class="ratio-display" id="ratioValue">21.00 : 1</div>
+      <div class="muted" style="margin-bottom:6px">Коэффициент контраста</div>
+      <div class="badges" id="badges"></div>
+    </div>
+
+    <h3 style="margin-top:40px">Калькулятор типографической шкалы</h3>
+    <p class="muted">Задайте базовый размер и коэффициент — получите согласованный
+      набор размеров для дизайн-токенов.</p>
+
+    <div class="tool">
+      <div class="tool-row">
+        <div class="field">
+          <label for="baseSize">Базовый размер, px</label>
+          <input type="number" id="baseSize" value="16" min="10" max="28" step="1">
+        </div>
+        <div class="field">
+          <label for="ratio">Коэффициент</label>
+          <select id="ratio">
+            <option value="1.125">1.125 — большая секунда</option>
+            <option value="1.2">1.2 — малая терция</option>
+            <option value="1.25" selected>1.25 — большая терция</option>
+            <option value="1.333">1.333 — чистая кварта</option>
+            <option value="1.414">1.414 — увеличенная кварта</option>
+            <option value="1.5">1.5 — чистая квинта</option>
+            <option value="1.618">1.618 — золотое сечение</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="stepsDown">Ступеней вниз</label>
+          <input type="number" id="stepsDown" value="1" min="0" max="3" step="1">
+        </div>
+      </div>
+      <div class="scale-out" id="scaleOut"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section id="quiz">
+  <div class="wrap reveal">
+    <div class="eyebrow">11 · Квиз</div>
+    <h2>Проверьте себя</h2>
+    <p class="lead">Пять вопросов по материалам модулей. Выберите ответ
+      и нажмите «Проверить».</p>
+
+    <div class="quiz" id="quizBlock" style="margin-top:26px">
+      <div class="q" data-correct="1">
+        <div class="q-title"><span class="qn">01</span>Какое минимальное соотношение контраста требует WCAG 2.2 уровня AA для обычного текста?</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="q1" value="0"><span>2:1</span></label>
+          <label class="opt"><input type="radio" name="q1" value="1"><span>4.5:1</span></label>
+          <label class="opt"><input type="radio" name="q1" value="2"><span>7:1</span></label>
+          <label class="opt"><input type="radio" name="q1" value="3"><span>10:1</span></label>
+        </div>
+      </div>
+      <div class="q" data-correct="2">
+        <div class="q-title"><span class="qn">02</span>Какой российский стандарт устанавливает требования доступности интернет-ресурсов?</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="q2" value="0"><span>ГОСТ Р ИСО 9241-210-2016</span></label>
+          <label class="opt"><input type="radio" name="q2" value="1"><span>ГОСТ 2.105-95</span></label>
+          <label class="opt"><input type="radio" name="q2" value="2"><span>ГОСТ Р 52872-2019</span></label>
+          <label class="opt"><input type="radio" name="q2" value="3"><span>ГОСТ Р 7.0.97-2016</span></label>
+        </div>
+      </div>
+      <div class="q" data-correct="1">
+        <div class="q-title"><span class="qn">03</span>Что такое дизайн-токен?</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="q3" value="0"><span>Файл с макетами в Figma</span></label>
+          <label class="opt"><input type="radio" name="q3" value="1"><span>Именованное значение дизайн-решения: цвет, отступ, радиус</span></label>
+          <label class="opt"><input type="radio" name="q3" value="2"><span>Элемент оплаты доступа к дизайн-системе</span></label>
+          <label class="opt"><input type="radio" name="q3" value="3"><span>Компонент с состояниями hover и focus</span></label>
+        </div>
+      </div>
+      <div class="q" data-correct="0">
+        <div class="q-title"><span class="qn">04</span>Сколько участников обычно достаточно для одного раунда юзабилити-теста по Якобу Нильсену?</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="q4" value="0"><span>Около 5</span></label>
+          <label class="opt"><input type="radio" name="q4" value="1"><span>Около 50</span></label>
+          <label class="opt"><input type="radio" name="q4" value="2"><span>Не менее 200</span></label>
+          <label class="opt"><input type="radio" name="q4" value="3"><span>Ровно 12</span></label>
+        </div>
+      </div>
+      <div class="q" data-correct="3">
+        <div class="q-title"><span class="qn">05</span>Какой метод оценки контраста учитывает восприятие иначе, чем формула WCAG?</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="q5" value="0"><span>HEART</span></label>
+          <label class="opt"><input type="radio" name="q5" value="1"><span>SUS</span></label>
+          <label class="opt"><input type="radio" name="q5" value="2"><span>POUR</span></label>
+          <label class="opt"><input type="radio" name="q5" value="3"><span>APCA</span></label>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+        <button class="btn" id="quizCheck">Проверить</button>
+        <button class="btn ghost" id="quizReset">Сбросить</button>
+        <span id="quizResult" class="muted" style="margin-left:auto"></span>
+      </div>
+    </div>
+
+    <h3 style="margin-top:44px">Чек-лист готовности интерфейса</h3>
+    <p class="muted">Отмечайте пункты по мере выполнения — прогресс сохраняется
+      в браузере.</p>
+    <div class="progress-wrap">
+      <div class="progress-top">
+        <span>Выполнено</span>
+        <span id="clCount">0 / 16</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="clFill"></div></div>
+    </div>
+    <div id="checklistItems"></div>
+    <div style="margin-top:20px">
+      <button class="btn ghost" id="clReset">Очистить прогресс</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GLOSSARY ============ -->
+<section id="glossary">
+  <div class="wrap reveal">
+    <div class="eyebrow">12 · Глоссарий</div>
+    <h2>92 термина с указанием источника</h2>
+    <p class="lead">Каждый термин опирается на реальный источник: стандарт, книгу,
+      публикацию автора или официальную документацию.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="search-bar">
+      <div class="search-input-wrap">
+        <input type="text" class="search-input" id="searchInput"
+               placeholder="Поиск термина: например, «юзабилити» или «WCAG»" autocomplete="off">
+        <button class="search-clear" id="searchClear" aria-label="Очистить">✕</button>
+      </div>
+      <div class="cats" id="cats">
+        <button class="cat-btn active" data-cat="all">Все</button>
+        <button class="cat-btn" data-cat="ux">UX</button>
+        <button class="cat-btn" data-cat="research">Исследования</button>
+        <button class="cat-btn" data-cat="ia">ИА</button>
+        <button class="cat-btn" data-cat="test">Тестирование</button>
+        <button class="cat-btn" data-cat="ui">UI</button>
+        <button class="cat-btn" data-cat="ds">Дизайн-системы</button>
+        <button class="cat-btn" data-cat="a11y">Доступность</button>
+        <button class="cat-btn" data-cat="tools">Инструменты</button>
+        <button class="cat-btn" data-cat="legal">Право и стандарты</button>
+        <button class="cat-btn" data-cat="people">Люди и методы</button>
+      </div>
+      <div class="counter" id="counter">92 термина</div>
+    </div>
+    <div id="glossaryOut"></div>
+    <div class="empty" id="empty">Ничего не найдено. Попробуйте другой запрос или категорию.</div>
+  </div>
+</section>
+
+<!-- ============ VERIFY ============ -->
+<section id="verify">
+  <div class="wrap reveal">
+    <div class="eyebrow">13 · Перепроверка теории</div>
+    <h2>Статусы утверждений курса</h2>
+    <p class="lead">32 утверждения из модулей со статусами: подтверждено,
+      проверить, контекст.</p>
+
+    <div class="tbl" style="margin-top:26px">
+      <table>
+        <thead>
+          <tr><th style="width:34%">Утверждение</th><th style="width:16%">Статус</th><th>Комментарий</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Термин <strong>UX</strong> введён Доном Норманом в 1990-х</td><td><span class="st ok">Подтверждено</span></td><td>Норман работал в Apple и популяризировал термин с середины 1990-х</td></tr>
+          <tr><td><strong>ISO 9241-11</strong> определяет юзабилити через три компонента</td><td><span class="st ok">Подтверждено</span></td><td>Актуальную редакцию можно проверить в базе ISO</td></tr>
+          <tr><td><strong>ГОСТ Р ИСО 9241-210-2016</strong> — человеко-ориентированное проектирование</td><td><span class="st ok">Подтверждено</span></td><td>Действующий национальный стандарт РФ</td></tr>
+          <tr><td><strong>10 эвристик Нильсена</strong> (1994, обновлены 2024)</td><td><span class="st ok">Подтверждено</span></td><td>Опубликованы на Nielsen Norman Group</td></tr>
+          <tr><td><strong>WCAG 2.2</strong> — актуальная версия руководства W3C</td><td><span class="st ok">Подтверждено</span></td><td>Опубликована в октябре 2023. WCAG 3.0 в разработке</td></tr>
+          <tr><td><strong>ГОСТ Р 52872-2019</strong> — доступность интернет-ресурсов</td><td><span class="st ok">Подтверждено</span></td><td>Действующий национальный стандарт РФ</td></tr>
+          <tr><td>Штрафы за утечки повышены <strong>ФЗ № 420-ФЗ от 30.11.2024</strong></td><td><span class="st warn">Проверить</span></td><td>Вступил в силу 30 мая 2025. Размеры штрафов — в актуальной редакции КоАП</td></tr>
+          <tr><td>Правило <strong>5 участников</strong> для юзабилити-теста (Нильсен)</td><td><span class="st ok">Подтверждено</span></td><td>Для количественных выводов нужна бо́льшая выборка</td></tr>
+          <tr><td><strong>SUS</strong> — шкала из 10 вопросов, балл 0–100</td><td><span class="st ok">Подтверждено</span></td><td>Автор — Джон Брук (1986). Средний балл около 68</td></tr>
+          <tr><td><strong>NPS</strong> — индекс готовности рекомендовать (0–10)</td><td><span class="st ok">Подтверждено</span></td><td>Автор — Фред Райхельд, Bain & Company</td></tr>
+          <tr><td><strong>HEART</strong> — рамка метрик Google</td><td><span class="st ok">Подтверждено</span></td><td>Автор — Керри Родден, Google Research</td></tr>
+          <tr><td><strong>Double Diamond</strong> — рамка Британского дизайн-совета</td><td><span class="st ok">Подтверждено</span></td><td>Опубликована Design Council UK в 2004</td></tr>
+          <tr><td><strong>JTBD</strong> — методология Jobs-to-be-Done</td><td><span class="st ok">Подтверждено</span></td><td>Развита Клейтоном Кристенсеном и Тони Ульвиком</td></tr>
+          <tr><td>Понятие <strong>«персона»</strong> введено Аланом Купером</td><td><span class="st ok">Подтверждено</span></td><td>Книга «The Inmates Are Running the Asylum» (1999)</td></tr>
+          <tr><td><strong>Карточная сортировка</strong> — метод исследования</td><td><span class="st ok">Подтверждено</span></td><td>Описана у Донны Спенсер (Donna Spencer)</td></tr>
+          <tr><td>Понятие <strong>«информационная архитектура»</strong> введено Ричардом Солом Вурманом</td><td><span class="st ok">Подтверждено</span></td><td>Использовал с 1975; развитие — у Розенфельда и Морвилля</td></tr>
+          <tr><td><strong>Правило трёх кликов</strong> — спорная эвристика</td><td><span class="st chk">Контекст</span></td><td>Не имеет строгого научного подтверждения</td></tr>
+          <tr><td><strong>8-pt система</strong> отступов</td><td><span class="st ok">Подтверждено</span></td><td>Восходит к практике Google Material Design</td></tr>
+          <tr><td><strong>OKLCH</strong> — перцептуально равномерное пространство</td><td><span class="st ok">Подтверждено</span></td><td>Описано в CSS Color Module Level 4 (W3C)</td></tr>
+          <tr><td>Контраст <strong>4.5:1</strong> для обычного текста (WCAG AA)</td><td><span class="st ok">Подтверждено</span></td><td>Требование WCAG 2.x; формула зафиксирована в спецификации</td></tr>
+          <tr><td><strong>APCA</strong> — альтернативный метод оценки контраста</td><td><span class="st ok">Подтверждено</span></td><td>Разработан Эндрю Сомерсом; не является нормативным</td></tr>
+          <tr><td><strong>Микроинтеракции</strong> — термин Дэна Сэффера</td><td><span class="st ok">Подтверждено</span></td><td>Книга «Microinteractions» (O'Reilly, 2013)</td></tr>
+          <tr><td>Длительности анимации: 100–150 / 200–300 / 400+ мс</td><td><span class="st chk">Контекст</span></td><td>Типичные диапазоны из практики; зависят от продукта</td></tr>
+          <tr><td><strong>Дизайн-токены</strong> и спецификация W3C Design Tokens CG</td><td><span class="st ok">Подтверждено</span></td><td>Рабочая группа W3C публикует спецификацию</td></tr>
+          <tr><td>Дизайн-система <strong>«Гвоздь»</strong> — Яндекс</td><td><span class="st ok">Подтверждено</span></td><td>Публично документированная система</td></tr>
+          <tr><td>Дизайн-система <strong>VKUI</strong> — VK, открытый исходный код</td><td><span class="st ok">Подтверждено</span></td><td>React-библиотека на GitHub</td></tr>
+          <tr><td>Дизайн-системы <strong>Bi-Design, Alfa DS, T-Bank DS</strong></td><td><span class="st ok">Подтверждено</span></td><td>Публично представленные системы</td></tr>
+          <tr><td><strong>Pixso, Penpot, Framer</strong> — редакторы интерфейсов</td><td><span class="st ok">Подтверждено</span></td><td>Penpot — открытый исходный код</td></tr>
+          <tr><td><strong>GigaChat, YandexGPT, Kandinsky, Шедеврум</strong></td><td><span class="st ok">Подтверждено</span></td><td>Продукты Сбера и Яндекса; обновляются</td></tr>
+          <tr><td>Шрифт <strong>Golos Text</strong> — российский шрифт</td><td><span class="st ok">Подтверждено</span></td><td>Разработан Paratype; свободное использование</td></tr>
+          <tr><td>Оценка числа людей с инвалидностью — <strong>1,3 млрд</strong></td><td><span class="st warn">Проверить</span></td><td>Оценка ВОЗ; уточняется в публикациях организации</td></tr>
+          <tr><td>Средний результат SUS — <strong>около 68</strong></td><td><span class="st ok">Подтверждено</span></td><td>Обобщённые данные из публикаций по шкале</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout warn" style="margin-top:22px">
+      <b>Прямая рекомендация.</b> Перед сдачей проекта или использованием в работе
+      любого факта — откройте первоисточник. Для WCAG это <em>w3.org</em>,
+      для ГОСТов — база Росстандарта, для законов — <em>pravo.gov.ru</em>,
+      для дизайн-систем — официальные сайты.
+    </div>
+  </div>
+</section>
+<!-- ============================================================ -->
+<!-- БЛОК: ИНФОРМАЦИЯ О ПРЕПОДАВАТЕЛЕ — вставить в конце страницы -->
+<!-- ============================================================ -->
+<style>
+  .teacher-block{
+    border-top:1px solid rgba(212,175,55,.16);
+    padding:44px 0 60px;
+    background:
+      radial-gradient(600px 300px at 50% 100%, rgba(212,175,55,.05), transparent 70%);
+    position:relative;
+  }
+  .teacher-inner{
+    max-width:1080px;margin:0 auto;padding:0 28px;
+    display:grid;gap:28px;
+    grid-template-columns:1fr;
+  }
+  @media(min-width:760px){
+    .teacher-inner{grid-template-columns:200px 1fr;align-items:start}
+  }
+  .teacher-label{
+    font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;
+    color:#d4af37;display:flex;align-items:center;gap:12px;
+    padding-top:6px;
+  }
+  .teacher-label::after{
+    content:'';height:1px;flex:1;max-width:60px;
+    background:linear-gradient(90deg,rgba(212,175,55,.4),transparent);
+  }
+  .teacher-card{
+    border:1px solid rgba(212,175,55,.34);
+    background:#0f0f12;
+    padding:30px 32px 32px;
+    position:relative;
+  }
+  .teacher-card::before,
+  .teacher-card::after{
+    content:'';position:absolute;width:14px;height:14px;
+    border:1px solid #d4af37;
+  }
+  .teacher-card::before{
+    top:-1px;left:-1px;border-right:none;border-bottom:none;
+  }
+  .teacher-card::after{
+    bottom:-1px;right:-1px;border-left:none;border-top:none;
+  }
+  .teacher-role{
+    font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;
+    color:#96928a;margin-bottom:12px;
+  }
+  .teacher-name{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:1.5rem;font-weight:400;letter-spacing:-.01em;
+    color:#eae7e0;line-height:1.2;margin-bottom:6px;
+  }
+  .teacher-name em{font-style:italic;color:#e8cd7a}
+  .teacher-course{
+    font-size:.92rem;color:#cfcbc2;margin-bottom:24px;
+    padding-bottom:22px;
+    border-bottom:1px dashed rgba(212,175,55,.16);
+  }
+  .teacher-course b{color:#eae7e0;font-weight:600}
+  .teacher-contacts-label{
+    font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:#d4af37;margin-bottom:14px;
+  }
+  .teacher-contacts{
+    display:flex;flex-direction:column;gap:11px;
+    list-style:none;margin:0;padding:0;
+  }
+  .teacher-contacts li{
+    display:flex;gap:14px;align-items:baseline;
+    font-size:.9rem;color:#c4c0b7;line-height:1.5;
+  }
+  .teacher-contacts li .ch{
+    font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:#8a7326;flex:none;width:88px;padding-top:3px;
+  }
+  .teacher-contacts a{
+    color:#e8cd7a;text-decoration:none;
+    border-bottom:1px solid rgba(212,175,55,.34);
+    transition:.25s;padding-bottom:1px;
+  }
+  .teacher-contacts a:hover{
+    color:#d4af37;border-bottom-color:#d4af37;
+  }
+  @media(max-width:560px){
+    .teacher-card{padding:24px 22px 26px}
+    .teacher-name{font-size:1.25rem}
+    .teacher-contacts li{flex-direction:column;gap:4px}
+    .teacher-contacts li .ch{width:auto}
+  }
+</style>
+
+<section class="teacher-block" aria-label="Информация о преподавателе">
+  <div class="teacher-inner">
+    <div class="teacher-label">Преподаватель</div>
+    <div class="teacher-card">
+      <div class="teacher-role">Курс «Проектирование интерфейсов пользователя»</div>
+      <h2 class="teacher-name">Евтушенко <em>Екатерина Дмитриевна</em></h2>
+      <p class="teacher-course">Ведущий преподаватель междисциплинарного курса
+        <b>«Проектирование интерфейсов пользователя»</b>.</p>
+
+      <div class="teacher-contacts-label">Связь с преподавателем</div>
+      <ul class="teacher-contacts">
+        <li>
+          <span class="ch">Эл. почта</span>
+          <span><a href="mailto:evtushenko.kkep1@yandex.ru">evtushenko.kkep1@yandex.ru</a></span>
+        </li>
+        <li>
+          <span class="ch">Мессенджер</span>
+          <span>через группу в <strong>Max</strong></span>
+        </li>
+        <li>
+          <span class="ch">Через старосту</span>
+          <span>обращение через старосту учебной группы</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+<!-- ============ RESOURCES ============ -->
+<section id="resources">
+  <div class="wrap reveal">
+    <div class="eyebrow">14 · Ресурсы</div>
+    <h2>Источники и куда идти дальше</h2>
+    <ul class="res-list" style="margin-top:24px">
+      <li><span class="cat">Стандарты</span><span class="val">WCAG 2.2 — W3C Web Content Accessibility Guidelines (w3.org)</span></li>
+      <li><span class="cat">Стандарты</span><span class="val">ГОСТ Р 52872-2019 — требования доступности интернет-ресурсов и приложений</span></li>
+      <li><span class="cat">Стандарты</span><span class="val">ГОСТ Р ИСО 9241-210-2016 — человеко-ориентированное проектирование</span></li>
+      <li><span class="cat">Спецификации</span><span class="val">W3C Design Tokens Community Group — формат обмена дизайн-токенами</span></li>
+      <li><span class="cat">Спецификации</span><span class="val">CSS Color Module Level 4 — пространство OKLCH</span></li>
+      <li><span class="cat">Право</span><span class="val">Федеральный закон № 152-ФЗ «О персональных данных» (pravo.gov.ru)</span></li>
+      <li><span class="cat">Право</span><span class="val">Федеральный закон № 420-ФЗ от 30.11.2024 — поправки о персональных данных</span></li>
+      <li><span class="cat">Дизайн-системы</span><span class="val">Гвоздь (Яндекс), VKUI (VK), Bi-Design (Сбер), Alfa Design System, T-Bank Design System</span></li>
+      <li><span class="cat">Инструменты</span><span class="val">Pixso, Penpot, Framer, Rive, Lottie, Spline, Figma</span></li>
+      <li><span class="cat">Аналитика</span><span class="val">Яндекс Метрика, AppMetrica</span></li>
+      <li><span class="cat">Опросы</span><span class="val">Яндекс Формы, Testograf, Anketolog</span></li>
+      <li><span class="cat">ИИ</span><span class="val">GigaChat (Сбер), YandexGPT (Яндекс), Kandinsky (Сбер), Шедеврум (Яндекс)</span></li>
+      <li><span class="cat">Книги</span><span class="val">Стив Круг «Не заставляйте меня думать»; Дон Норман «Дизайн привычных вещей»; Алан Купер «Об интерфейсе»; Дэн Сэффер «Microinteractions»</span></li>
+    </ul>
+
+    <div class="callout" style="margin-top:26px">
+      <b>Об актуальности.</b> Пособие составлено по состоянию на 2026 год.
+      Нормативные документы, состав дизайн-систем и доступность сервисов меняются.
+      Перед использованием любого факта в рабочем проекте сверяйтесь
+      с первоисточником — это часть профессиональной гигиены дизайнера.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="margin-bottom:14px"><span class="dot"></span>UX/UI · 2026</div>
+        <p>Учебное пособие по проектированию интерфейсов пользователя:
+          теория, интерактивные инструменты, глоссарий и перепроверка фактов
+          в одном файле.</p>
+      </div>
+      <div style="text-align:right">
+        <p style="color:var(--gold-dim);font-size:11px;letter-spacing:.2em;text-transform:uppercase">
+          Проектируйте с уважением<br>к пользователю
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ================= ПРОГРЕСС ЧТЕНИЯ ================= */
+(function(){
+  const bar = document.getElementById('readbar');
+  function update(){
+    const h = document.documentElement;
+    const total = h.scrollHeight - h.clientHeight;
+    bar.style.width = (total > 0 ? (h.scrollTop / total) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
+  update();
+})();
+
+/* ================= REVEAL ================= */
+(function(){
+  const items = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    items.forEach(i => i.classList.add('in'));
+    return;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.06, rootMargin:'0px 0px -30px 0px'});
+  items.forEach(i => io.observe(i));
+})();
+
+/* ================= АККОРДЕОН ================= */
+(function(){
+  function setMax(mod){
+    const body = mod.querySelector('.module-body');
+    if(mod.classList.contains('open')){
+      body.style.maxHeight = body.scrollHeight + 'px';
+    } else {
+      body.style.maxHeight = '0px';
+    }
+  }
+  document.querySelectorAll('.module-head').forEach(head => {
+    head.addEventListener('click', () => {
+      const mod = head.parentElement;
+      const wasOpen = mod.classList.contains('open');
+      mod.classList.toggle('open', !wasOpen);
+      setMax(mod);
+    });
+  });
+  document.querySelectorAll('.module.open').forEach(setMax);
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.module.open').forEach(setMax);
+  });
+})();
+
+/* ================= КОНТРАСТ ================= */
+(function(){
+  const fg = document.getElementById('fgColor');
+  const bg = document.getElementById('bgColor');
+  const fs = document.getElementById('fontSize');
+  const fw = document.getElementById('fontWeight');
+  const preview = document.getElementById('contrastPreview');
+  const prevBig = document.getElementById('prevBig');
+  const prevSmall = document.getElementById('prevSmall');
+  const ratioValue = document.getElementById('ratioValue');
+  const badges = document.getElementById('badges');
+  if(!fg) return;
+
+  function hexToRgb(hex){
+    const h = hex.replace('#','');
+    const full = h.length === 3 ? h.split('').map(c => c + c).join('') : h;
+    return {r:parseInt(full.slice(0,2),16),g:parseInt(full.slice(2,4),16),b:parseInt(full.slice(4,6),16)};
+  }
+  function lum(rgb){
+    const c = [rgb.r, rgb.g, rgb.b].map(v => {
+      const x = v / 255;
+      return x <= 0.04045 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126*c[0] + 0.7152*c[1] + 0.0722*c[2];
+  }
+  function contrast(a, b){
+    const l1 = lum(hexToRgb(a)), l2 = lum(hexToRgb(b));
+    const lighter = Math.max(l1, l2), darker = Math.min(l1, l2);
+    return (lighter + 0.05) / (darker + 0.05);
+  }
+  function render(){
+    const c = contrast(fg.value, bg.value);
+    const size = parseFloat(fs.value) || 16;
+    const weight = parseInt(fw.value, 10) || 400;
+    const isLarge = size >= 24 || (size >= 18.66 && weight >= 700);
+
+    preview.style.background = bg.value;
+    prevBig.style.color = fg.value;
+    prevSmall.style.color = fg.value;
+    prevBig.style.fontSize = Math.max(size, 24) + 'px';
+    prevBig.style.fontWeight = weight;
+    prevSmall.style.fontSize = size + 'px';
+    prevSmall.style.fontWeight = weight;
+
+    ratioValue.textContent = c.toFixed(2) + ' : 1';
+
+    const checks = [
+      {n:'AA обычный (4.5:1)', p: c >= 4.5},
+      {n:'AA крупный (3:1)', p: c >= 3},
+      {n:'AAA обычный (7:1)', p: c >= 7},
+      {n:'AAA крупный (4.5:1)', p: c >= 4.5},
+      {n:'UI-элементы (3:1)', p: c >= 3}
+    ];
+    badges.innerHTML = checks.map(ch =>
+      '<span class="badge ' + (ch.p ? 'pass' : 'fail') + '">' +
+      (ch.p ? '✓ ' : '✕ ') + ch.n + '</span>'
+    ).join('') +
+    '<span class="badge" style="color:var(--gold-2)">' +
+      (isLarge ? 'Текст считается крупным' : 'Текст считается обычным') +
+    '</span>';
+  }
+  [fg, bg, fs, fw].forEach(el => {
+    el.addEventListener('input', render);
+    el.addEventListener('change', render);
+  });
+  render();
+})();
+
+/* ================= ШКАЛА ================= */
+(function(){
+  const baseEl = document.getElementById('baseSize');
+  const ratioEl = document.getElementById('ratio');
+  const downEl = document.getElementById('stepsDown');
+  const out = document.getElementById('scaleOut');
+  if(!out) return;
+  const labels = ['XS','S','M','L','XL','2XL','3XL','4XL','5XL'];
+  function render(){
+    const base = parseFloat(baseEl.value) || 16;
+    const ratio = parseFloat(ratioEl.value) || 1.25;
+    const down = parseInt(downEl.value, 10) || 0;
+    const sizes = [];
+    for(let i = -down; i <= 6; i++){
+      sizes.push({px: base * Math.pow(ratio, i)});
+    }
+    out.innerHTML = sizes.map((s, idx) => {
+      const rounded = Math.round(s.px * 100) / 100;
+      const display = Math.round(s.px * 10) / 10;
+      const label = labels[idx] || ('step ' + idx);
+      return '<div class="scale-item">' +
+        '<span class="lbl">' + label + '</span>' +
+        '<span class="sample" style="font-size:' + display + 'px">Aa Интерфейс</span>' +
+        '<span class="px">' + rounded + ' px</span>' +
+      '</div>';
+    }).join('');
+  }
+  [baseEl, ratioEl, downEl].forEach(el => {
+    el.addEventListener('input', render);
+    el.addEventListener('change', render);
+  });
+  render();
+})();
+
+/* ================= КВИЗ ================= */
+(function(){
+  const quiz = document.getElementById('quizBlock');
+  if(!quiz) return;
+  const checkBtn = document.getElementById('quizCheck');
+  const resetBtn = document.getElementById('quizReset');
+  const result = document.getElementById('quizResult');
+
+  checkBtn.addEventListener('click', () => {
+    let correct = 0, answered = 0;
+    quiz.querySelectorAll('.q').forEach(q => {
+      const correctIdx = parseInt(q.dataset.correct, 10);
+      const selected = q.querySelector('input:checked');
+      q.querySelectorAll('.opt').forEach((opt, i) => {
+        opt.classList.add('locked');
+        if(i === correctIdx) opt.classList.add('correct');
+      });
+      if(selected){
+        answered++;
+        const chosen = parseInt(selected.value, 10);
+        if(chosen === correctIdx) correct++;
+        else selected.closest('.opt').classList.add('wrong');
+      }
+    });
+    if(answered === 0){
+      result.textContent = 'Выберите хотя бы один ответ';
+      return;
+    }
+    result.innerHTML = 'Верно: <strong style="color:var(--gold-2)">' +
+      correct + '</strong> из 5';
+    checkBtn.disabled = true;
+  });
+  resetBtn.addEventListener('click', () => {
+    quiz.querySelectorAll('input[type=radio]').forEach(i => i.checked = false);
+    quiz.querySelectorAll('.opt').forEach(o =>
+      o.classList.remove('correct','wrong','locked'));
+    result.textContent = '';
+    checkBtn.disabled = false;
+  });
+})();
+
+/* ================= ЧЕК-ЛИСТ ================= */
+(function(){
+  const items = [
+    {t:'Проведено минимум 3 пользовательских интервью', s:'Глубинные интервью о прошлом опыте'},
+    {t:'Сформулированы JTBD-утверждения', s:'Формат: когда… я хочу… чтобы…'},
+    {t:'Построена карта пути пользователя (CJM)', s:'С точками контакта, эмоциями и барьерами'},
+    {t:'Собрана информационная архитектура', s:'Проверена карточной сортировкой или tree testing'},
+    {t:'Создан кликабельный прототип', s:'Достаточный для проверки сценария'},
+    {t:'Все отступы кратны 8 (или 4) пикселям', s:'8-pt система соблюдена'},
+    {t:'Типографика построена на модульной шкале', s:'6–8 размеров, у каждого есть имя'},
+    {t:'Цвета описаны через семантические роли', s:'Не «синий», а «action»'},
+    {t:'Составлен набор дизайн-токенов', s:'Цвета, отступы, радиусы, тени, длительности'},
+    {t:'Контраст текста проверен: минимум 4.5:1', s:'Для крупного текста — 3:1'},
+    {t:'Все интерактивные элементы доступны с клавиатуры', s:'Видимый фокус и логичный порядок'},
+    {t:'Интерфейс не передаёт смысл только цветом', s:'Ошибки и статусы дублируются текстом'},
+    {t:'У изображений есть осмысленные alt-тексты', s:'Декоративные скрыты от скринридеров'},
+    {t:'Соблюдены требования 152-ФЗ', s:'Согласия, cookie-баннер, минимизация данных'},
+    {t:'Проведён юзабилити-тест минимум с 3 участниками', s:'Замерены Task Success Rate и SUS'},
+    {t:'Подготовлен кейс для портфолио', s:'Задача → исследование → решение → проверка'}
+  ];
+
+  const container = document.getElementById('checklistItems');
+  const fill = document.getElementById('clFill');
+  const count = document.getElementById('clCount');
+  const resetBtn = document.getElementById('clReset');
+  if(!container) return;
+
+  const KEY = 'ui2026_full_checklist_v1';
+  let state = [];
+  try{ state = JSON.parse(localStorage.getItem(KEY) || '[]'); }
+  catch(e){ state = []; }
+  if(!Array.isArray(state) || state.length !== items.length){
+    state = new Array(items.length).fill(false);
+  }
+
+  function save(){
+    try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+  }
+  function render(){
+    container.innerHTML = items.map((item, i) =>
+      '<label class="check-item' + (state[i] ? ' done' : '') + '">' +
+        '<input type="checkbox" data-i="' + i + '"' + (state[i] ? ' checked' : '') + '>' +
+        '<span class="ct">' + item.t + '<small>' + item.s + '</small></span>' +
+      '</label>'
+    ).join('');
+    container.querySelectorAll('input[type=checkbox]').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const i = parseInt(cb.dataset.i, 10);
+        state[i] = cb.checked;
+        cb.closest('.check-item').classList.toggle('done', cb.checked);
+        save();
+        updateProgress();
+      });
+    });
+    updateProgress();
+  }
+  function updateProgress(){
+    const done = state.filter(Boolean).length;
+    fill.style.width = (done / items.length * 100) + '%';
+    count.textContent = done + ' / ' + items.length;
+  }
+  resetBtn.addEventListener('click', () => {
+    state = new Array(items.length).fill(false);
+    save();
+    render();
+  });
+  render();
+})();
+
+/* ================= ГЛОССАРИЙ ================= */
+(function(){
+  const GLOSSARY = [
+    {cat:'ux', w:'UX', s:'User Experience', d:'Совокупность ощущений, эмоций и результатов, которые человек получает при взаимодействии с продуктом. Термин популяризирован Доном Норманом в 1990-х.'},
+    {cat:'ux', w:'UI', s:'User Interface', d:'Визуальный и интерактивный слой продукта: экраны, компоненты, типографика, цвет, анимация. UI — часть UX.'},
+    {cat:'ux', w:'Юзабилити', s:'Usability', d:'По ISO 9241-11 определяется через три компонента: результативность, эффективность и удовлетворённость.'},
+    {cat:'ux', w:'Человеко-ориентированное проектирование', s:'Human-Centered Design', d:'Подход, при котором проектирование начинается с изучения пользователей. В РФ закреплён в ГОСТ Р ИСО 9241-210-2016.'},
+    {cat:'ux', w:'Инклюзивный дизайн', s:'Inclusive Design', d:'Проектирование, учитывающее разнообразие людей: возраст, язык, культуру, цифровую грамотность, временные ограничения.'},
+    {cat:'ux', w:'Эффект пандуса', s:'Curb-cut effect', d:'Принцип: решение, спроектированное для людей с ограничениями, помогает широкой аудитории.'},
+    {cat:'ux', w:'Человеко-ориентированный процесс', s:'по ГОСТ Р ИСО 9241-210-2016', d:'Циклический процесс: понимание контекста → определение требований → создание решений → оценка.'},
+    {cat:'research', w:'CustDev', s:'Customer Development', d:'Методология глубинных интервью с пользователями, развитая Стивом Бланком.'},
+    {cat:'research', w:'Глубинное интервью', s:'In-depth interview', d:'Качественный метод: разговор о прошлом опыте. Вопросы формулируются как «расскажите, как вы в последний раз…».'},
+    {cat:'research', w:'JTBD', s:'Jobs-to-be-Done', d:'Методология, развитая Клейтоном Кристенсеном и Тони Ульвиком. Формулировка: «Когда… я хочу… чтобы…».'},
+    {cat:'research', w:'Персона', s:'Persona', d:'Обобщённый портрет сегмента аудитории на основе реальных данных. Понятие введено Аланом Купером (1999).'},
+    {cat:'research', w:'CJM', s:'Customer Journey Map', d:'Карта пути пользователя: точки контакта, действия, эмоции, барьеры.'},
+    {cat:'research', w:'Карточная сортировка', s:'Card Sorting', d:'Метод исследования ментальных моделей: пользователи группируют карточки с разделами.'},
+    {cat:'research', w:'Дендрограмма', s:'Dendrogram', d:'Диаграмма схожести, показывающая, как часто карточки попадали в одну группу.'},
+    {cat:'research', w:'Tree testing', s:'Проверка дерева', d:'Метод проверки ИА: пользователь ищет раздел в готовой структуре без визуального дизайна.'},
+    {cat:'research', w:'Дневниковое исследование', s:'Diary study', d:'Качественный метод длительного наблюдения: участники фиксируют опыт в течение дней или недель.'},
+    {cat:'research', w:'Анализ конкурентов', s:'Competitive analysis', d:'Разбор существующих решений по единым критериям. Цель — паттерны и отличия, не копирование.'},
+    {cat:'ia', w:'Информационная архитектура', s:'IA', d:'Структура контента и навигации. Термин введён Ричардом Солом Вурманом.'},
+    {cat:'ia', w:'Карта сайта', s:'Sitemap', d:'Иерархическая схема всех страниц и разделов продукта.'},
+    {cat:'ia', w:'User flow', s:'Схема сценария', d:'Схема шагов пользователя для достижения цели. Фиксирует точки принятия решений и ветвления.'},
+    {cat:'ia', w:'Хлебные крошки', s:'Breadcrumbs', d:'Навигационный элемент, показывающий путь от главной до текущей страницы.'},
+    {cat:'ia', w:'Правило трёх кликов', s:'Three-click rule', d:'Спорная эвристика. Не имеет строгого научного подтверждения, применяется как ориентир.'},
+    {cat:'ia', w:'Ментальная модель', s:'Mental model', d:'Представление пользователя о том, как устроен продукт.'},
+    {cat:'test', w:'Юзабилити-тест', s:'Usability test', d:'Проверка интерфейса на реальных пользователях. Задачи формулируются как цель.'},
+    {cat:'test', w:'Модерируемый тест', s:'Moderated test', d:'Тест, в котором ведущий задаёт вопросы и наблюдает.'},
+    {cat:'test', w:'Немодерируемый тест', s:'Unmoderated test', d:'Тест, который участник проходит самостоятельно.'},
+    {cat:'test', w:'Думайте вслух', s:'Think-aloud protocol', d:'Техника: участник проговаривает свои мысли во время теста.'},
+    {cat:'test', w:'Task Success Rate', s:'Доля успеха', d:'Метрика: процент участников, успешно выполнивших задачу.'},
+    {cat:'test', w:'Time on Task', s:'Время на задачу', d:'Метрика: сколько времени участник тратит на задачу.'},
+    {cat:'test', w:'Error Rate', s:'Частота ошибок', d:'Метрика: как часто и какие ошибки совершают участники.'},
+    {cat:'test', w:'SUS', s:'System Usability Scale', d:'Опросник из 10 утверждений, балл от 0 до 100. Автор — Джон Брук (1986). Средний результат около 68.'},
+    {cat:'test', w:'NPS', s:'Net Promoter Score', d:'Индекс готовности рекомендовать по шкале 0–10. Автор — Фред Райхельд.'},
+    {cat:'test', w:'SEQ', s:'Single Ease Question', d:'Вопрос после задачи: «Насколько легко было?» по шкале 1–7.'},
+    {cat:'test', w:'HEART', s:'Рамка метрик Google', d:'Happiness, Engagement, Adoption, Retention, Task success. Автор — Керри Родден.'},
+    {cat:'test', w:'A/B-тест', s:'A/B test', d:'Сравнение двух вариантов на реальном трафике.'},
+    {cat:'test', w:'Эвристическая оценка', s:'Heuristic evaluation', d:'Экспертный разбор интерфейса по набору эвристик.'},
+    {cat:'ui', w:'8-pt система', s:'8-point grid', d:'Отступы и размеры кратны 8 (или 4). Восходит к практике Material Design.'},
+    {cat:'ui', w:'Модульная шкала', s:'Modular scale', d:'Набор размеров текста, выведенный из базового и коэффициента (1.125, 1.25, 1.333, 1.618).'},
+    {cat:'ui', w:'x-height', s:'Высота строчной «x»', d:'Высота строчной буквы без выносных элементов. Большой x-height лучше для экрана.'},
+    {cat:'ui', w:'Интерлиньяж', s:'Line-height / Leading', d:'Расстояние между строками. Для основного текста 1.5–1.6; для заголовков 1.1–1.3.'},
+    {cat:'ui', w:'Кернинг', s:'Kerning', d:'Расстояние между отдельными парами символов.'},
+    {cat:'ui', w:'Трекинг', s:'Tracking', d:'Равномерное изменение расстояния между всеми символами.'},
+    {cat:'ui', w:'Визуальная иерархия', s:'Visual hierarchy', d:'Управление вниманием через размер, вес, цвет, контраст, пространство и позицию.'},
+    {cat:'ui', w:'OKLCH', s:'Цветовое пространство', d:'Перцептуально равномерное пространство, описано в CSS Color Module Level 4.'},
+    {cat:'ui', w:'HSL, RGB, HEX', s:'Цветовые модели', d:'Классические модели представления цвета в вебе.'},
+    {cat:'ui', w:'Easing', s:'Функция плавности', d:'Функция изменения скорости анимации. ease-out — вход, ease-in — выход.'},
+    {cat:'ui', w:'Микроинтеракция', s:'Microinteraction', d:'Термин Дэна Сэффера (2013). Состоит из триггера, правил, обратной связи, циклов и режимов.'},
+    {cat:'ds', w:'Дизайн-система', s:'Design system', d:'Договорённость между дизайном и разработкой: токены, компоненты, правила.'},
+    {cat:'ds', w:'Дизайн-токен', s:'Design token', d:'Именованное значение дизайн-решения. Формат обмена — W3C Design Tokens Community Group.'},
+    {cat:'ds', w:'Компонент', s:'Component', d:'Переиспользуемый элемент интерфейса с набором состояний.'},
+    {cat:'ds', w:'Паттерн', s:'Pattern', d:'Правило композиции компонентов.'},
+    {cat:'ds', w:'Атомарный дизайн', s:'Atomic Design', d:'Методология Брэда Фроста: атомы → молекулы → организмы → шаблоны → страницы.'},
+    {cat:'ds', w:'Гайдлайн', s:'Guideline', d:'Правило или рекомендация по использованию элементов дизайн-системы.'},
+    {cat:'ds', w:'Стайлгайд', s:'Styleguide', d:'Документ, описывающий визуальные правила: цвета, шрифты, отступы, состояния.'},
+    {cat:'ds', w:'Гвоздь', s:'Дизайн-система Яндекса', d:'Публично документированная система, лежащая в основе Поиска, Карт, Такси, Маркета.'},
+    {cat:'ds', w:'VKUI', s:'Дизайн-система VK', d:'Открытая React-библиотека компонентов, применяемая в VK Mini Apps.'},
+    {cat:'ds', w:'Bi-Design', s:'Дизайн-система Сбера', d:'Система продуктов экосистемы, включая СберБанк Онлайн.'},
+    {cat:'ds', w:'Alfa Design System', s:'Альфа-Банк', d:'Публично документированная дизайн-система с гайдлайнами и токенами.'},
+    {cat:'ds', w:'T-Bank Design System', s:'Т-Банк', d:'Дизайн-система Т-Банка (ранее Тинькофф), ориентированная на финансовые сценарии.'},
+    {cat:'a11y', w:'Доступность', s:'Accessibility, a11y', d:'Проектирование интерфейсов для людей с разными возможностями.'},
+    {cat:'a11y', w:'WCAG', s:'Web Content Accessibility Guidelines', d:'Руководство W3C. Актуальная версия — 2.2 (октябрь 2023). Версия 3.0 в разработке.'},
+    {cat:'a11y', w:'POUR', s:'Принципы WCAG', d:'Perceivable, Operable, Understandable, Robust.'},
+    {cat:'a11y', w:'Уровни WCAG', s:'A / AA / AAA', d:'Три уровня соответствия. Практический минимум для продуктов — AA.'},
+    {cat:'a11y', w:'ARIA', s:'WAI-ARIA', d:'Атрибуты для передачи семантики вспомогательным технологиям.'},
+    {cat:'a11y', w:'Скринридер', s:'Screen reader', d:'Программа, озвучивающая интерфейс. NVDA, JAWS, VoiceOver, TalkBack.'},
+    {cat:'a11y', w:'Alt-текст', s:'Alternative text', d:'Текстовое описание изображения. Для содержательных — смысл, для декоративных — пустой alt.'},
+    {cat:'a11y', w:'Контраст 4.5:1', s:'WCAG AA', d:'Минимум для обычного текста по WCAG уровня AA. Для крупного — 3:1.'},
+    {cat:'a11y', w:'APCA', s:'Accessible Perceptual Contrast Algorithm', d:'Альтернативный метод оценки контраста, автор — Эндрю Сомерс. Не является нормативным.'},
+    {cat:'a11y', w:'Зоны касания', s:'Touch target', d:'Область для нажатия. WCAG 2.2 AA — 24×24 CSS px; Apple HIG — 44×44 pt; Material Design — 48×48 dp.'},
+    {cat:'tools', w:'Figma', s:'Редактор интерфейсов', d:'Основной инструмент дизайна с 2016 года. С 2022 ограничил доступ для российских организаций.'},
+    {cat:'tools', w:'Pixso', s:'Редактор интерфейсов', d:'Коммерческий редактор, активно используемый в РФ.'},
+    {cat:'tools', w:'Penpot', s:'Открытый редактор', d:'Редактор интерфейсов с открытым исходным кодом.'},
+    {cat:'tools', w:'Framer', s:'Прототипы и сайты', d:'Инструмент для интерактивных прототипов с акцентом на анимацию.'},
+    {cat:'tools', w:'Rive', s:'Анимация', d:'Инструмент для создания интерактивной анимации.'},
+    {cat:'tools', w:'Lottie', s:'Анимация', d:'Формат и библиотека для векторной анимации в веб и мобильных приложениях.'},
+    {cat:'tools', w:'Spline', s:'3D для интерфейсов', d:'Инструмент для 3D-сцен, встраиваемых в веб-интерфейсы.'},
+    {cat:'tools', w:'Miro', s:'Онлайн-доска', d:'Платформа для совместной работы: карточная сортировка, CJM, воркшопы.'},
+    {cat:'tools', w:'FigJam', s:'Онлайн-доска Figma', d:'Доска для воркшопов и исследований внутри экосистемы Figma.'},
+    {cat:'tools', w:'Яндекс Метрика', s:'Аналитика', d:'Российская платформа веб-аналитики: воронки, тепловые карты.'},
+    {cat:'tools', w:'AppMetrica', s:'Мобильная аналитика', d:'Платформа аналитики мобильных приложений от Яндекса.'},
+    {cat:'tools', w:'Testograf', s:'Опросы', d:'Российская платформа для опросов и панельных исследований.'},
+    {cat:'tools', w:'Anketolog', s:'Опросы', d:'Российская платформа для опросов с панелью респондентов.'},
+    {cat:'legal', w:'152-ФЗ', s:'О персональных данных', d:'Федеральный закон № 152-ФЗ. Регулирует сбор, хранение и обработку персональных данных.'},
+    {cat:'legal', w:'420-ФЗ', s:'Поправки от 30.11.2024', d:'ФЗ № 420-ФЗ. Повысил ответственность за нарушения в области персональных данных. Вступил в силу 30 мая 2025.'},
+    {cat:'legal', w:'ГОСТ Р 52872-2019', s:'Доступность', d:'Национальный стандарт РФ: требования доступности интернет-ресурсов и приложений.'},
+    {cat:'legal', w:'ГОСТ Р ИСО 9241-210-2016', s:'Проектирование', d:'Национальный стандарт, описывающий человеко-ориентированный процесс проектирования.'},
+    {cat:'legal', w:'ISO 9241-11', s:'Юзабилити', d:'Международный стандарт: юзабилити через результативность, эффективность и удовлетворённость.'},
+    {cat:'legal', w:'W3C', s:'Консорциум', d:'World Wide Web Consortium — организация, разрабатывающая веб-стандарты.'},
+    {cat:'legal', w:'Design Tokens CG', s:'W3C рабочая группа', d:'Design Tokens Community Group — публикует спецификацию формата обмена токенами.'},
+    {cat:'people', w:'Дон Норман', s:'Don Norman', d:'Автор термина UX, соучредитель Nielsen Norman Group. Книга «Дизайн привычных вещей».'},
+    {cat:'people', w:'Якоб Нильсен', s:'Jakob Nielsen', d:'Соучредитель Nielsen Norman Group. Автор 10 эвристик (1994, обновлены 2024).'},
+    {cat:'people', w:'Алан Купер', s:'Alan Cooper', d:'Автор понятия «персона». Книга «The Inmates Are Running the Asylum» (1999).'},
+    {cat:'people', w:'Питер Морвилль', s:'Peter Morville', d:'Соавтор книги по информационной архитектуре. Автор модели «соты UX».'},
+    {cat:'people', w:'Ричард Сол Вурман', s:'Richard Saul Wurman', d:'Ввёл термин «информационная архитектура» в 1975 году. Основатель конференции TED.'},
+    {cat:'people', w:'Луис Розенфельд', s:'Louis Rosenfeld', d:'Соавтор классической книги по информационной архитектуре.'},
+    {cat:'people', w:'Дэн Сэффер', s:'Dan Saffer', d:'Автор книги «Microinteractions» (O\'Reilly, 2013).'},
+    {cat:'people', w:'Брэд Фрост', s:'Brad Frost', d:'Автор методологии Atomic Design.'},
+    {cat:'people', w:'Стив Круг', s:'Steve Krug', d:'Автор книги «Не заставляйте меня думать».'},
+    {cat:'people', w:'Джон Брук', s:'John Brooke', d:'Автор шкалы SUS (1986).'},
+    {cat:'people', w:'Фред Райхельд', s:'Fred Reichheld', d:'Автор метрики NPS, Bain & Company.'},
+    {cat:'people', w:'Клейтон Кристенсен', s:'Clayton Christensen', d:'Один из авторов JTBD. Профессор Гарвардской школы бизнеса.'},
+    {cat:'people', w:'Тони Ульвик', s:'Tony Ulwick', d:'Автор методологии Outcome-Driven Innovation.'},
+    {cat:'people', w:'Керри Родден', s:'Kerry Rodden', d:'Автор рамки метрик HEART (Google Research).'},
+    {cat:'people', w:'Британский дизайн-совет', s:'Design Council UK', d:'Организация, опубликовавшая рамку Double Diamond в 2004.'},
+    {cat:'people', w:'Эндрю Сомерс', s:'Andrew Somers', d:'Разработчик метода APCA.'},
+    {cat:'people', w:'Донна Спенсер', s:'Donna Spencer', d:'Автор книги «Card Sorting: Designing Usable Categories».'},
+    {cat:'people', w:'Стив Бланк', s:'Steve Blank', d:'Автор методологии Customer Development.'}
+  ];
+
+  const out = document.getElementById('glossaryOut');
+  const emptyEl = document.getElementById('empty');
+  const counterEl = document.getElementById('counter');
+  const searchInput = document.getElementById('searchInput');
+  const searchClear = document.getElementById('searchClear');
+  const catButtons = document.querySelectorAll('.cat-btn');
+  if(!out) return;
+
+  const LABELS = {
+    ux:'UX', research:'Исследования', ia:'Информационная архитектура',
+    test:'Тестирование', ui:'UI', ds:'Дизайн-системы',
+    a11y:'Доступность', tools:'Инструменты', legal:'Право и стандарты',
+    people:'Люди и методы'
+  };
+  const ORDER = ['ux','research','ia','test','ui','ds','a11y','tools','legal','people'];
+  let state = {q:'', cat:'all'};
+
+  function esc(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+  }
+
+  function render(){
+    const q = state.q.trim().toLowerCase();
+    const filtered = GLOSSARY.filter(item => {
+      if(state.cat !== 'all' && item.cat !== state.cat) return false;
+      if(!q) return true;
+      return (item.w + ' ' + item.s + ' ' + item.d).toLowerCase().includes(q);
+    });
+
+    const groups = {};
+    filtered.forEach(i => {
+      if(!groups[i.cat]) groups[i.cat] = [];
+      groups[i.cat].push(i);
+    });
+
+    let html = '';
+    ORDER.forEach(cat => {
+      if(!groups[cat]) return;
+      html += '<div class="sec-head"><span class="num">' + LABELS[cat] +
+        '</span><h3>' + LABELS[cat] + '</h3><span class="count">' +
+        groups[cat].length + '</span></div>';
+      groups[cat].forEach(item => {
+        html += '<div class="term"><div class="word">' + esc(item.w) +
+          '<small>' + esc(item.s) + '</small></div>' +
+          '<div class="def">' + esc(item.d) + '</div></div>';
+      });
+    });
+    out.innerHTML = html;
+
+    if(filtered.length === 0){
+      emptyEl.classList.add('visible');
+      out.style.display = 'none';
+    } else {
+      emptyEl.classList.remove('visible');
+      out.style.display = 'block';
+    }
+
+    if(q || state.cat !== 'all'){
+      counterEl.textContent = 'Найдено: ' + filtered.length + ' из ' + GLOSSARY.length;
+    } else {
+      counterEl.textContent = GLOSSARY.length + ' терминов';
+    }
+  }
+
+  searchInput.addEventListener('input', () => {
+    state.q = searchInput.value;
+    searchClear.classList.toggle('visible', searchInput.value.length > 0);
+    render();
+  });
+  searchClear.addEventListener('click', () => {
+    searchInput.value = '';
+    state.q = '';
+    searchClear.classList.remove('visible');
+    render();
+    searchInput.focus();
+  });
+  catButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      catButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.cat = btn.dataset.cat;
+      render();
+    });
+  });
+  render();
+})();
+</script>
+
+</body>
+</html>

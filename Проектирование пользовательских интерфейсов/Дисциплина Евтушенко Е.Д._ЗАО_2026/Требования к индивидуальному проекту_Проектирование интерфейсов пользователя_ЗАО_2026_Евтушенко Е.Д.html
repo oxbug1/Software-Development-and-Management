@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Индивидуальный проект · 30 предметных областей · UX/UI 2026</title>
+<style>
+:root{
+  --bg:#0a0a0b;--bg-2:#0f0f12;--surface:#141418;--surface-2:#1a1a20;
+  --line:rgba(212,175,55,.16);--line-2:rgba(212,175,55,.34);
+  --gold:#d4af37;--gold-2:#e8cd7a;--gold-dim:#8a7326;
+  --text:#eae7e0;--muted:#96928a;
+  --ok:#5fbf8a;--warn:#d9a95f;--err:#d9705f;
+  --font-d:Georgia,'Times New Roman',serif;
+  --font-b:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--text);font-family:var(--font-b);
+  font-size:15.5px;line-height:1.7;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;padding:0 0 80px}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 500px at 12% -8%, rgba(212,175,55,.08), transparent 60%),
+             radial-gradient(700px 500px at 92% 8%, rgba(212,175,55,.05), transparent 60%)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:90;background:rgba(10,10,11,.85);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line)}
+.nav{max-width:1080px;margin:0 auto;padding:0 28px;display:flex;
+  align-items:center;gap:24px;height:60px}
+.brand{font-family:var(--font-d);font-size:14px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold-2);white-space:nowrap;
+  display:flex;align-items:center;gap:10px;flex:none}
+.brand .dot{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);flex:none}
+.nav-links{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{color:var(--muted);text-decoration:none;white-space:nowrap;
+  padding:4px 0;border-bottom:1px solid transparent;transition:.25s}
+.nav-links a:hover{color:var(--gold-2);border-bottom-color:var(--line-2)}
+
+/* HERO */
+.hero{padding:80px 0 60px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:14px}
+.eyebrow::after{content:'';height:1px;flex:1;max-width:120px;
+  background:linear-gradient(90deg,var(--line-2),transparent)}
+h1{font-family:var(--font-d);font-weight:400;font-size:clamp(2rem,5vw,3.2rem);
+  line-height:1.1;letter-spacing:-.02em;margin-bottom:20px}
+h1 em{font-style:italic;color:var(--gold-2)}
+h2{font-family:var(--font-d);font-weight:400;font-size:clamp(1.6rem,3.4vw,2.2rem);
+  line-height:1.15;letter-spacing:-.01em;margin-bottom:16px}
+h3{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:10px}
+h4{font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:12px}
+p{color:#cfcbc2;margin-bottom:14px}
+p.lead{font-size:1.05rem;color:#dedad2;max-width:72ch}
+.muted{color:var(--muted);font-size:.88rem}
+strong{color:var(--text);font-weight:600}
+code{background:var(--surface-2);border:1px solid var(--line);padding:1px 6px;
+  font-size:.85rem;color:var(--gold-2);font-family:var(--mono)}
+.hero-sub{font-size:1.05rem;color:#c8c4bb;max-width:66ch;margin-bottom:30px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:30px;padding-top:26px;
+  border-top:1px solid var(--line)}
+.hero-meta div .k{font-family:var(--font-d);font-size:1.6rem;color:var(--gold-2);line-height:1}
+.hero-meta div .v{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin-top:7px}
+
+/* SECTIONS */
+section{padding:64px 0;border-bottom:1px solid var(--line);position:relative}
+section:last-of-type{border-bottom:none}
+
+/* HONEST */
+.honest{border:1px dashed var(--line-2);background:rgba(212,175,55,.03);
+  padding:20px 24px;margin:24px 0;font-size:.87rem;color:#b8b4ab;line-height:1.65}
+.honest b{color:var(--gold-2);font-weight:600;display:block;margin-bottom:6px;
+  letter-spacing:.02em}
+
+/* STRUCTURE */
+.stages{display:grid;gap:16px;margin-top:30px}
+@media(min-width:760px){.stages{grid-template-columns:1fr 1fr}}
+.stage{border:1px solid var(--line);background:var(--bg-2);padding:24px 26px;
+  transition:.3s;position:relative}
+.stage:hover{border-color:var(--line-2);background:var(--surface)}
+.stage .n{font-family:var(--font-d);font-size:12px;letter-spacing:.2em;
+  color:var(--gold);display:block;margin-bottom:10px}
+.stage h3{font-family:var(--font-d);font-weight:400;font-size:1.1rem;
+  color:var(--gold-2);margin-bottom:10px;letter-spacing:-.005em}
+.stage p{font-size:.88rem;color:#c4c0b7;margin-bottom:8px}
+.stage p:last-child{margin-bottom:0}
+.stage ul{list-style:none;margin:8px 0}
+.stage ul li{position:relative;padding-left:18px;margin-bottom:6px;
+  font-size:.85rem;color:#c4c0b7}
+.stage ul li::before{content:'';position:absolute;left:0;top:9px;
+  width:5px;height:1px;background:var(--gold)}
+
+/* CALLOUT */
+.callout{border-left:2px solid var(--gold);padding:14px 20px;margin:16px 0;
+  background:rgba(212,175,55,.035);font-size:.87rem;color:#c4c0b7;line-height:1.65}
+.callout b{color:var(--gold-2);font-weight:600}
+.callout.warn{border-left-color:var(--warn);background:rgba(217,169,95,.04)}
+.callout.warn b{color:var(--warn)}
+
+/* CRITERIA */
+.criteria{display:grid;gap:14px;margin-top:26px}
+@media(min-width:760px){.criteria{grid-template-columns:repeat(3,1fr)}}
+.crit{border:1px solid var(--line);padding:20px 22px;background:var(--bg-2)}
+.crit h4{font-size:.72rem;letter-spacing:.16em;color:var(--gold);
+  margin-bottom:10px}
+.crit p{font-size:.86rem;color:#c4c0b7;margin-bottom:0;line-height:1.6}
+
+/* FILTER */
+.filter-bar{display:flex;flex-wrap:wrap;gap:7px;margin:28px 0 26px;
+  padding-bottom:20px;border-bottom:1px solid var(--line)}
+.filter-btn{background:none;border:1px solid var(--line);color:var(--muted);
+  font-family:var(--font-b);font-size:11px;letter-spacing:.09em;
+  text-transform:uppercase;padding:7px 14px;cursor:pointer;transition:.2s}
+.filter-btn:hover{color:var(--gold-2);border-color:var(--line-2)}
+.filter-btn.active{background:var(--gold);color:#0a0a0b;border-color:var(--gold)}
+.counter{font-size:11px;color:var(--muted);letter-spacing:.1em;
+  text-transform:uppercase;margin-bottom:20px}
+
+/* TOPICS GRID */
+.topics{display:grid;gap:16px}
+@media(min-width:700px){.topics{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.topics{grid-template-columns:1fr 1fr 1fr}}
+.topic-card{border:1px solid var(--line);background:var(--bg-2);
+  padding:22px 22px 20px;transition:.3s;position:relative;
+  display:flex;flex-direction:column;gap:10px}
+.topic-card:hover{border-color:var(--line-2);background:var(--surface);
+  transform:translateY(-2px)}
+.topic-card .top{display:flex;justify-content:space-between;
+  align-items:baseline;gap:12px;padding-bottom:10px;
+  border-bottom:1px dashed rgba(212,175,55,.14)}
+.topic-card .num{font-family:var(--font-d);font-size:13px;letter-spacing:.16em;
+  color:var(--gold-dim);flex:none}
+.topic-card .cat-tag{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);border:1px solid var(--line-2);padding:2px 8px;flex:none}
+.topic-card h3{font-family:var(--font-d);font-weight:400;font-size:1.02rem;
+  color:var(--text);line-height:1.3;letter-spacing:-.005em}
+.topic-card .desc{font-size:.84rem;color:#bdb9b0;line-height:1.55;
+  flex-grow:1}
+.topic-card .meta{display:flex;flex-direction:column;gap:6px;
+  padding-top:10px;border-top:1px solid rgba(212,175,55,.09);
+  font-size:.76rem;color:var(--muted);line-height:1.5}
+.topic-card .meta b{color:var(--gold-2);font-weight:600;
+  font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  display:inline-block;min-width:78px}
+
+.empty{text-align:center;padding:50px 20px;color:var(--muted);
+  font-size:.9rem;border:1px dashed var(--line);display:none;grid-column:1 / -1}
+.empty.visible{display:block}
+
+/* BRIEF EXAMPLE */
+.brief{border:1px solid var(--line-2);background:var(--bg-2);
+  padding:26px 28px;margin-top:26px}
+.brief h3{font-family:var(--font-d);font-weight:400;font-size:1.15rem;
+  color:var(--gold-2);margin-bottom:16px}
+.brief-row{display:grid;gap:14px;padding:14px 0;
+  border-bottom:1px solid rgba(212,175,55,.09)}
+.brief-row:last-child{border-bottom:none;padding-bottom:0}
+.brief-row .k{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);font-weight:600}
+.brief-row .v{font-size:.88rem;color:#c4c0b7;margin-top:4px}
+
+/* TABLE */
+.tbl{overflow-x:auto;border:1px solid var(--line);margin:20px 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:520px}
+th{text-align:left;padding:11px 16px;background:var(--surface-2);font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+  border-bottom:1px solid var(--line-2);font-weight:600}
+td{padding:11px 16px;border-bottom:1px solid rgba(212,175,55,.08);
+  color:#c4c0b7;vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+
+/* FOOTER */
+footer{padding:50px 0 60px;border-top:1px solid var(--line)}
+.foot-grid{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;
+  align-items:flex-start}
+footer p{font-size:.8rem;color:var(--muted);max-width:62ch;margin:0}
+.foot-brand{font-family:var(--font-d);font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold-2);display:flex;
+  align-items:center;gap:10px;margin-bottom:14px}
+.foot-brand .dot{width:5px;height:5px;background:var(--gold);transform:rotate(45deg)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);
+  transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:640px){
+  .wrap{padding:0 18px}
+  .nav{padding:0 18px;gap:14px}
+  .hero{padding:56px 0 44px}
+  section{padding:50px 0}
+  .stage{padding:20px}
+  .topic-card{padding:18px 18px 16px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <div class="brand"><span class="dot"></span>Проект · 2026</div>
+    <div class="nav-links">
+      <a href="#structure">Структура</a>
+      <a href="#criteria">Критерии выбора</a>
+      <a href="#topics">30 областей</a>
+      <a href="#brief">Бриф</a>
+      <a href="#deliverables">Результаты</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Индивидуальный проект · Модуль VIII</div>
+    <h1>От брифа до защиты:<br><em>структура и выбор темы</em></h1>
+    <p class="hero-sub">Страница для итогового проекта курса. Здесь собрана
+      структура работы, критерии выбора предметной области и 30 вариантов тем,
+      соответствующих реальным направлениям, в которых работают дизайнеры
+      интерфейсов в России.</p>
+    <div class="hero-meta">
+      <div><div class="k">8</div><div class="v">Этапов работы</div></div>
+      <div><div class="k">30</div><div class="v">Предметных областей</div></div>
+      <div><div class="k">10</div><div class="v">Категорий</div></div>
+      <div><div class="k">3</div><div class="v">Платформы</div></div>
+    </div>
+  </div>
+</section>
+<!-- ============================================================ -->
+<!-- БЛОК: ИНФОРМАЦИЯ О ПРЕПОДАВАТЕЛЕ — вставить в конце страницы -->
+<!-- ============================================================ -->
+<style>
+  .teacher-block{
+    border-top:1px solid rgba(212,175,55,.16);
+    padding:44px 0 60px;
+    background:
+      radial-gradient(600px 300px at 50% 100%, rgba(212,175,55,.05), transparent 70%);
+    position:relative;
+  }
+  .teacher-inner{
+    max-width:1080px;margin:0 auto;padding:0 28px;
+    display:grid;gap:28px;
+    grid-template-columns:1fr;
+  }
+  @media(min-width:760px){
+    .teacher-inner{grid-template-columns:200px 1fr;align-items:start}
+  }
+  .teacher-label{
+    font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;
+    color:#d4af37;display:flex;align-items:center;gap:12px;
+    padding-top:6px;
+  }
+  .teacher-label::after{
+    content:'';height:1px;flex:1;max-width:60px;
+    background:linear-gradient(90deg,rgba(212,175,55,.4),transparent);
+  }
+  .teacher-card{
+    border:1px solid rgba(212,175,55,.34);
+    background:#0f0f12;
+    padding:30px 32px 32px;
+    position:relative;
+  }
+  .teacher-card::before,
+  .teacher-card::after{
+    content:'';position:absolute;width:14px;height:14px;
+    border:1px solid #d4af37;
+  }
+  .teacher-card::before{
+    top:-1px;left:-1px;border-right:none;border-bottom:none;
+  }
+  .teacher-card::after{
+    bottom:-1px;right:-1px;border-left:none;border-top:none;
+  }
+  .teacher-role{
+    font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;
+    color:#96928a;margin-bottom:12px;
+  }
+  .teacher-name{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:1.5rem;font-weight:400;letter-spacing:-.01em;
+    color:#eae7e0;line-height:1.2;margin-bottom:6px;
+  }
+  .teacher-name em{font-style:italic;color:#e8cd7a}
+  .teacher-course{
+    font-size:.92rem;color:#cfcbc2;margin-bottom:24px;
+    padding-bottom:22px;
+    border-bottom:1px dashed rgba(212,175,55,.16);
+  }
+  .teacher-course b{color:#eae7e0;font-weight:600}
+  .teacher-contacts-label{
+    font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:#d4af37;margin-bottom:14px;
+  }
+  .teacher-contacts{
+    display:flex;flex-direction:column;gap:11px;
+    list-style:none;margin:0;padding:0;
+  }
+  .teacher-contacts li{
+    display:flex;gap:14px;align-items:baseline;
+    font-size:.9rem;color:#c4c0b7;line-height:1.5;
+  }
+  .teacher-contacts li .ch{
+    font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:#8a7326;flex:none;width:88px;padding-top:3px;
+  }
+  .teacher-contacts a{
+    color:#e8cd7a;text-decoration:none;
+    border-bottom:1px solid rgba(212,175,55,.34);
+    transition:.25s;padding-bottom:1px;
+  }
+  .teacher-contacts a:hover{
+    color:#d4af37;border-bottom-color:#d4af37;
+  }
+  @media(max-width:560px){
+    .teacher-card{padding:24px 22px 26px}
+    .teacher-name{font-size:1.25rem}
+    .teacher-contacts li{flex-direction:column;gap:4px}
+    .teacher-contacts li .ch{width:auto}
+  }
+</style>
+
+<section class="teacher-block" aria-label="Информация о преподавателе">
+  <div class="teacher-inner">
+    <div class="teacher-label">Преподаватель</div>
+    <div class="teacher-card">
+      <div class="teacher-role">Курс «Проектирование интерфейсов пользователя»</div>
+      <h2 class="teacher-name">Евтушенко <em>Екатерина Дмитриевна</em></h2>
+      <p class="teacher-course">Ведущий преподаватель междисциплинарного курса
+        <b>«Проектирование интерфейсов пользователя»</b>.</p>
+
+      <div class="teacher-contacts-label">Связь с преподавателем</div>
+      <ul class="teacher-contacts">
+        <li>
+          <span class="ch">Эл. почта</span>
+          <span><a href="mailto:evtushenko.kkep1@yandex.ru">evtushenko.kkep1@yandex.ru</a></span>
+        </li>
+        <li>
+          <span class="ch">Мессенджер</span>
+          <span>через группу в <strong>Max</strong></span>
+        </li>
+        <li>
+          <span class="ch">Через старосту</span>
+          <span>обращение через старосту учебной группы</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+<!-- ============ STRUCTURE ============ -->
+<section id="structure">
+  <div class="wrap reveal">
+    <div class="eyebrow">01 · Структура проекта</div>
+    <h2>Восемь этапов работы</h2>
+    <p class="lead">Модель построена по рамке человеко-ориентированного
+      проектирования (ГОСТ Р ИСО 9241-210-2016) и соответствует этапам,
+      описанным в модуле VIII курса. Каждый этап завершается артефактом,
+      который становится входом для следующего.</p>
+
+    <div class="stages">
+      <div class="stage">
+        <span class="n">ЭТАП 01</span>
+        <h3>Бриф и постановка задачи</h3>
+        <p>Формализуем проблему, аудиторию, ограничения и метрики успеха.</p>
+        <ul>
+          <li>Зачем — бизнес-цель</li>
+          <li>Для кого — первичный сегмент</li>
+          <li>Что — обязательные функции</li>
+          <li>Как — платформы и ограничения</li>
+          <li>Критерии успеха</li>
+        </ul>
+      </div>
+
+      <div class="stage">
+        <span class="n">ЭТАП 02</span>
+        <h3>UX-исследование</h3>
+        <p>Интервью, анализ конкурентов, сбор данных.</p>
+        <ul>
+          <li>3–5 глубинных интервью</li>
+          <li>Анализ 3–5 конкурентов по единым критериям</li>
+          <li>Фиксация наблюдений и цитат</li>
+        </ul>
+      </div>
+
+      <div class="stage">
+        <span class="n">ЭТАП 03</span>
+        <h3>Синтез и формулировка проблемы</h3>
+        <p>Превращаем сырые данные в артефакты проектирования.</p>
+        <ul>
+          <li>JTBD-утверждения</li>
+          <li>Персоны на основе паттернов</li>
+          <li>CJM с барьерами</li>
+        </ul>
+      </div>
+
+      <div class="stage">
+        <span class="n">ЭТАП 04</span>
+        <h3>Информационная архитектура</h3>
+        <p>Структура контента и навигация для всех платформ.</p>
+        <ul>
+          <li>Карта сайта</li>
+          <li>User flow ключевых сценариев</li>
+          <li>Проверка через карточную сортировку</li>
+        </ul>
+      </div>
+
+      <div class="stage">
+        <span class="n">ЭТАП 05</span>
+        <h3>Дизайн-система и прототипы</h3>
+        <p>От wireframe до hi-fi макетов для десктопа, планшета, смартфона.</p>
+        <ul>
+          <li>Токены: цвет, отступы, типографика</li>
+          <li>Библиотека компонентов с состояниями</li>
+          <li>Ключевые экраны для каждой платформы</li>
+        </ul>
+      </div>
+
+      <div class="stage">
+        <span class="n">ЭТАП 06</span>
+        <h3>Интерактивность</h3>
+        <p>Переходы, состояния, микроанимации, жесты.</p>
+        <ul>
+          <li>Кликабельный прототип</li>
+          <li>Единая система анимаций</li>
+          <li>Тактильный отклик для мобильных</li>
+        </ul>
+      </div>
+
+      <div class="stage">
+        <span class="n">ЭТАП 07</span>
+        <h3>Юзабилити-тестирование</h3>
+        <p>Проверка на реальных пользователях.</p>
+        <ul>
+          <li>3–5 участников</li>
+          <li>Замер Task Success Rate, SEQ, SUS</li>
+          <li>Фиксация проблем с приоритетами</li>
+        </ul>
+      </div>
+
+      <div class="stage">
+        <span class="n">ЭТАП 08</span>
+        <h3>Правки и защита</h3>
+        <p>Оптимизация на основе данных и подготовка кейса.</p>
+        <ul>
+          <li>Приоритизация правок</li>
+          <li>Повторная проверка затронутых сценариев</li>
+          <li>Структура презентации</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>Ключевой принцип.</b> Проект оценивается не только по финальному макету,
+      но и по <strong>ходу мысли</strong>: как формулировалась проблема, какие
+      гипотезы проверялись, как данные повлияли на решение.
+    </div>
+  </div>
+</section>
+
+<!-- ============ CRITERIA ============ -->
+<section id="criteria">
+  <div class="wrap reveal">
+    <div class="eyebrow">02 · Критерии выбора</div>
+    <h2>Как выбрать предметную область</h2>
+    <p class="lead">Хорошая тема — та, в которой вы можете провести реальное
+      исследование и получить доступ к пользователям. Не выбирайте область
+      «на будущее»: работать придётся сейчас.</p>
+
+    <div class="criteria">
+      <div class="crit">
+        <h4>Доступ к пользователям</h4>
+        <p>Вы можете найти 3–5 человек, реально пользующихся продуктом
+          в этой области, и провести с ними интервью и тест.</p>
+      </div>
+      <div class="crit">
+        <h4>Понятная проблема</h4>
+        <p>Существует конкретная боль, которую можно сформулировать в одном
+          предложении. Не «сделать красиво», а «устранить X».</p>
+      </div>
+      <div class="crit">
+        <h4>Обозримый объём</h4>
+        <p>Проект укладывается в 4–8 ключевых экранов. Не пытайтесь охватить
+          всю экосистему — берите один сценарий.</p>
+      </div>
+      <div class="crit">
+        <h4>Три платформы</h4>
+        <p>Тема позволяет спроектировать десктопную, планшетную и мобильную
+          версии с осмысленными различиями, а не просто «сжать макет».</p>
+      </div>
+      <div class="crit">
+        <h4>Проверяемость</h4>
+        <p>Можно провести юзабилити-тест прототипа на реальных задачах
+          и замерить хотя бы Task Success Rate и SEQ.</p>
+      </div>
+      <div class="crit">
+        <h4>Реальность области</h4>
+        <p>Область существует на рынке, в ней работают дизайнеры, есть
+          публичные примеры продуктов и документация. Не выдумывайте
+          «сервис будущего» — берите то, что есть.</p>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <b>Чего избегать.</b> Тем, требующих данных, к которым у вас нет
+      доступа (закрытые корпоративные системы без возможности интервью),
+      тем с юридическими ограничениями (медицинские данные пациентов без
+      согласия) и тем, где невозможно провести тестирование.
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOPICS ============ -->
+<section id="topics">
+  <div class="wrap reveal">
+    <div class="eyebrow">03 · Предметные области</div>
+    <h2>30 вариантов тем</h2>
+    <p class="lead">Все области существуют на российском рынке: в них работают
+      продуктовые команды, есть публичные примеры интерфейсов и доступные
+      пользователи. Отфильтруйте по категории, чтобы сузить выбор.</p>
+
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-cat="all">Все (30)</button>
+      <button class="filter-btn" data-cat="gov">Госсектор</button>
+      <button class="filter-btn" data-cat="fin">Финансы</button>
+      <button class="filter-btn" data-cat="med">Медицина</button>
+      <button class="filter-btn" data-cat="edu">Образование</button>
+      <button class="filter-btn" data-cat="trade">Торговля и услуги</button>
+      <button class="filter-btn" data-cat="transport">Транспорт</button>
+      <button class="filter-btn" data-cat="media">Медиа и досуг</button>
+      <button class="filter-btn" data-cat="b2b">B2B и корпоративные</button>
+      <button class="filter-btn" data-cat="industry">Промышленность</button>
+      <button class="filter-btn" data-cat="life">Быт и здоровье</button>
+    </div>
+
+    <div class="counter" id="counter">Показано: 30 из 30</div>
+
+    <div class="topics" id="topicsGrid">
+      <!-- заполняется скриптом -->
+    </div>
+    <div class="empty" id="empty">В этой категории пока нет тем. Выберите другую.</div>
+  </div>
+</section>
+
+<!-- ============ BRIEF ============ -->
+<section id="brief">
+  <div class="wrap reveal">
+    <div class="eyebrow">04 · Шаблон брифа</div>
+    <h2>Как оформить бриф проекта</h2>
+    <p class="lead">Бриф — первый документ проекта. Он определяет границы работы
+      и критерии, по которым вас будут оценивать. Ниже — пример заполнения
+      для одной из тем.</p>
+
+    <div class="brief">
+      <h3>Пример: сервис записи к врачу в городской поликлинике</h3>
+
+      <div class="brief-row">
+        <div class="k">Проблема</div>
+        <div class="v">Пользователи не понимают, к какому специалисту идти,
+          и тратят время на перебор вариантов. Запись через разные каналы
+          (телефон, портал, приложение) даёт несогласованные результаты.</div>
+      </div>
+
+      <div class="brief-row">
+        <div class="k">Аудитория</div>
+        <div class="v">Взрослые 30–65 лет, регулярно обращающиеся в поликлинику
+          по месту жительства. Первичный сегмент — люди с хроническими
+          заболеваниями, посещающие врача 3+ раз в год.</div>
+      </div>
+
+      <div class="brief-row">
+        <div class="k">Задача проекта</div>
+        <div class="v">Спроектировать интерфейс записи к врачу, который
+          помогает выбрать специалиста по симптомам, показывает доступные
+          слоты и подтверждает запись с понятной обратной связью.</div>
+      </div>
+
+      <div class="brief-row">
+        <div class="k">Платформы</div>
+        <div class="v">Десктоп (веб-портал), планшет (в холле поликлиники),
+          смартфон (личное использование).</div>
+      </div>
+
+      <div class="brief-row">
+        <div class="k">Ограничения</div>
+        <div class="v">Соответствие ГОСТ Р 52872-2019 по доступности.
+          Обработка персональных данных — по 152-ФЗ. Интеграция с существующей
+          системой расписания (не проектируем её, только интерфейс записи).</div>
+      </div>
+
+      <div class="brief-row">
+        <div class="k">Метрики успеха</div>
+        <div class="v">Task Success Rate ≥ 80% на сценарии записи.
+          SUS ≥ 70. Снижение числа обращений в регистратуру
+          (в реальном продукте — по логам; в учебном проекте —
+          оценка участников теста).</div>
+      </div>
+
+      <div class="brief-row">
+        <div class="k">Что не входит</div>
+        <div class="v">Электронная медкарта, телемедицина, оплата,
+          интеграция с аптеками — за пределами этого проекта.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>Совет.</b> Формулируйте «что не входит» — это защищает от
+      расползания объёма и позволяет уложиться в сроки.
+    </div>
+  </div>
+</section>
+
+<!-- ============ DELIVERABLES ============ -->
+<section id="deliverables">
+  <div class="wrap reveal">
+    <div class="eyebrow">05 · Результаты проекта</div>
+    <h2>Что нужно сдать</h2>
+
+    <div class="tbl">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:26%">Артефакт</th>
+            <th style="width:16%">Этап</th>
+            <th>Что должно быть видно</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Бриф</strong></td>
+            <td>01</td>
+            <td>Проблема, аудитория, задача, платформы, ограничения, метрики, что не входит</td>
+          </tr>
+          <tr>
+            <td><strong>Отчёт об исследовании</strong></td>
+            <td>02–03</td>
+            <td>Методы, выборка, ключевые инсайты, JTBD, персоны, CJM</td>
+          </tr>
+          <tr>
+            <td><strong>Анализ конкурентов</strong></td>
+            <td>02</td>
+            <td>3–5 продуктов по единым критериям, выводы о паттернах и отличиях</td>
+          </tr>
+          <tr>
+            <td><strong>Карта сайта и user flow</strong></td>
+            <td>04</td>
+            <td>Иерархия разделов, ключевые сценарии, ветвления, состояния ошибок</td>
+          </tr>
+          <tr>
+            <td><strong>Дизайн-система</strong></td>
+            <td>05</td>
+            <td>Токены, компоненты со всеми состояниями, правила использования</td>
+          </tr>
+          <tr>
+            <td><strong>Прототипы</strong></td>
+            <td>05–06</td>
+            <td>Десктоп, планшет, смартфон. Кликабельный с переходами и анимациями</td>
+          </tr>
+          <tr>
+            <td><strong>Отчёт о тестировании</strong></td>
+            <td>07</td>
+            <td>Сценарий, участники, метрики (Task Success Rate, SEQ, SUS), найденные проблемы</td>
+          </tr>
+          <tr>
+            <td><strong>Список правок</strong></td>
+            <td>08</td>
+            <td>Приоритизация: критично / важно / минор, с обоснованием</td>
+          </tr>
+          <tr>
+            <td><strong>Презентация кейса</strong></td>
+            <td>08</td>
+            <td>Контекст → исследование → решение → проверка → результат</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <b>Критерии оценки.</b> Оценивается полнота прохождения этапов, качество
+      аргументации решений, работа с данными и то, насколько правки основаны
+      на результатах тестирования, а не на вкусовых предпочтениях.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand"><span class="dot"></span>Индивидуальный проект · 2026</div>
+        <p>Страница для итогового проекта курса «Проектирование интерфейсов
+          пользователя». 30 предметных областей соответствуют реальным
+          направлениям, в которых работают дизайнеры интерфейсов
+          в России.</p>
+      </div>
+      <div style="text-align:right">
+        <p style="color:var(--gold-dim);font-size:11px;letter-spacing:.2em;
+          text-transform:uppercase">Проектируйте с уважением<br>к пользователю</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ================= 30 ПРЕДМЕТНЫХ ОБЛАСТЕЙ ================= */
+const TOPICS = [
+  {
+    cat:'gov', catLabel:'Госсектор',
+    title:'Портал государственных услуг',
+    desc:'Интерфейс получения государственной услуги: подача заявления, отслеживание статуса, получение результата. Проблема — сложные формулировки и многошаговые формы.',
+    audience:'Граждане 25–65 лет, обращающиеся за услугами разного уровня сложности',
+    platforms:'Десктоп, планшет, смартфон'
+  },
+  {
+    cat:'gov', catLabel:'Госсектор',
+    title:'Электронные закупки для поставщиков',
+    desc:'Личный кабинет участника закупок: поиск тендеров, подача заявки, работа с документацией. Проблема — высокая когнитивная нагрузка и юридическая плотность.',
+    audience:'Представители малого и среднего бизнеса, участвующие в закупках',
+    platforms:'Десктоп, планшет'
+  },
+  {
+    cat:'gov', catLabel:'Госсектор',
+    title:'Портал для записи в МФЦ',
+    desc:'Выбор услуги, подбор отделения по расположению, запись на удобное время, напоминания. Проблема — непонимание, какие услуги доступны в каком центре.',
+    audience:'Граждане, обращающиеся за бытовыми и административными услугами',
+    platforms:'Десктоп, смартфон'
+  },
+  {
+    cat:'fin', catLabel:'Финансы',
+    title:'Мобильный банкинг для частных клиентов',
+    desc:'Просмотр счетов, переводы, платежи, управление картами. Проблема — баланс между функциональностью и понятностью для разных возрастных сегментов.',
+    audience:'Держатели банковских карт 18–70 лет',
+    platforms:'Десктоп, планшет, смартфон'
+  },
+  {
+    cat:'fin', catLabel:'Финансы',
+    title:'Личный кабинет налогоплательщика',
+    desc:'Просмотр начислений, оплата, подача деклараций, сверка с работодателем. Проблема — юридическая терминология и страх ошибки.',
+    audience:'Физические лица и ИП, обязанные отчитываться',
+    platforms:'Десктоп, смартфон'
+  },
+  {
+    cat:'fin', catLabel:'Финансы',
+    title:'Сервис учёта личных финансов',
+    desc:'Категоризация расходов, бюджеты, аналитика. Проблема — мотивация вести учёт регулярно и понятность отчётов.',
+    audience:'Люди 22–45 лет, планирующие бюджет',
+    platforms:'Десктоп, смартфон'
+  },
+  {
+    cat:'med', catLabel:'Медицина',
+    title:'Запись к врачу в поликлинике',
+    desc:'Выбор специалиста по симптомам, доступные слоты, подтверждение записи, напоминания. Проблема — непонимание, к кому именно идти.',
+    audience:'Взрослые 30–65 лет, регулярно посещающие врача',
+    platforms:'Десктоп, планшет, смартфон'
+  },
+  {
+    cat:'med', catLabel:'Медицина',
+    title:'Личный кабинет пациента',
+    desc:'Просмотр результатов анализов, история приёмов, рекомендации. Проблема — понятная подача медицинских данных без потери точности.',
+    audience:'Пациенты с хроническими заболеваниями',
+    platforms:'Десктоп, смартфон'
+  },
+  {
+    cat:'med', catLabel:'Медицина',
+    title:'Курсы реабилитации после травм',
+    desc:'Программа упражнений, дневник прогресса, связь с врачом. Проблема — мотивация и корректная фиксация состояния.',
+    audience:'Пациенты после травм и операций, проходящие восстановление',
+    platforms:'Планшет, смартфон'
+  },
+  {
+    cat:'edu', catLabel:'Образование',
+    title:'Платформа онлайн-курсов',
+    desc:'Каталог, запись, прохождение уроков, домашние задания, прогресс. Проблема — удержание и завершение курса.',
+    audience:'Взрослые 20–45 лет, повышающие квалификацию',
+    platforms:'Десктоп, планшет, смартфон'
+  },
+  {
+    cat:'edu', catLabel:'Образование',
+    title:'Электронный дневник для родителей',
+    desc:'Оценки, домашние задания, расписание, связь с учителем. Проблема — плотность информации и разные потребности родителей и детей.',
+    audience:'Родители школьников 1–11 классов',
+    platforms:'Десктоп, смартфон'
+  },
+  {
+    cat:'edu', catLabel:'Образование',
+    title:'Образовательный сервис для детей',
+    desc:'Игровые задания, прогресс, достижения, родительский контроль. Проблема — удержание внимания и безопасность.',
+    audience:'Дети 6–12 лет и их родители',
+    platforms:'Планшет, смартфон'
+  },
+  {
+    cat:'trade', catLabel:'Торговля и услуги',
+    title:'Маркетплейс с доставкой',
+    desc:'Поиск, каталог, корзина, оформление, отслеживание доставки. Проблема — выбор среди множества предложений и доверие к продавцу.',
+    audience:'Покупатели 20–55 лет, заказывающие регулярно',
+    platforms:'Десктоп, планшет, смартфон'
+  },
+  {
+    cat:'trade', catLabel:'Торговля и услуги',
+    title:'Доставка продуктов из магазина',
+    desc:'Сборка корзины, замена товаров, слоты доставки, оплата. Проблема — замена недоступных товаров и точность заказа.',
+    audience:'Городские жители 25–55 лет',
+    platforms:'Смартфон, планшет'
+  },
+  {
+    cat:'trade', catLabel:'Торговля и услуги',
+    title:'Сервис бронирования в ресторанах',
+    desc:'Поиск по кухне, району, времени, бронь столика. Проблема — актуальность данных о свободных местах.',
+    audience:'Городские жители 20–45 лет',
+    platforms:'Смартфон, десктоп'
+  },
+  {
+    cat:'trade', catLabel:'Торговля и услуги',
+    title:'Салон красоты: запись и услуги',
+    desc:'Выбор мастера, услуги, времени, история визитов. Проблема — доверие к мастеру и понятность ценообразования.',
+    audience:'Клиенты салонов 20–55 лет',
+    platforms:'Смартфон, десктоп'
+  },
+  {
+    cat:'transport', catLabel:'Транспорт',
+    title:'Каршеринг',
+    desc:'Поиск автомобиля, бронирование, открытие, завершение поездки, оплата. Проблема — стресс в момент начала и конца аренды.',
+    audience:'Городские жители 25–45 лет без личного авто',
+    platforms:'Смартфон'
+  },
+  {
+    cat:'transport', catLabel:'Транспорт',
+    title:'Бронирование междугородних билетов',
+    desc:'Выбор маршрута, даты, места, оплата, возврат. Проблема — разнообразие перевозчиков и правил.',
+    audience:'Путешественники 20–60 лет',
+    platforms:'Десктоп, смартфон'
+  },
+  {
+    cat:'transport', catLabel:'Транспорт',
+    title:'Отслеживание городского транспорта',
+    desc:'Прогноз прибытия, маршруты, пересадки. Проблема — точность данных в реальном времени.',
+    audience:'Пассажиры общественного транспорта',
+    platforms:'Смартфон'
+  },
+  {
+    cat:'media', catLabel:'Медиа и досуг',
+    title:'Стриминговый видеосервис',
+    desc:'Каталог, рекомендации, просмотр, продолжение с другого устройства. Проблема — выбор из большого каталога и удержание.',
+    audience:'Зрители 18–45 лет',
+    platforms:'Десктоп, планшет, смартфон, ТВ'
+  },
+  {
+    cat:'media', catLabel:'Медиа и досуг',
+    title:'Электронная библиотека',
+    desc:'Поиск, чтение, закладки, заметки, синхронизация. Проблема — комфорт длительного чтения.',
+    audience:'Читатели 18–65 лет',
+    platforms:'Планшет, смартфон, десктоп'
+  },
+  {
+    cat:'media', catLabel:'Медиа и досуг',
+    title:'Сервис подкастов',
+    desc:'Поиск, подписки, очередь прослушивания, офлайн. Проблема — управление большим количеством подписок.',
+    audience:'Слушатели 18–45 лет',
+    platforms:'Смартфон'
+  },
+  {
+    cat:'b2b', catLabel:'B2B и корпоративные',
+    title:'CRM для отдела продаж',
+    desc:'Работа с лидами, сделки, задачи, отчёты. Проблема — плотность данных и скорость ввода.',
+    audience:'Менеджеры по продажам и руководители',
+    platforms:'Десктоп, планшет'
+  },
+  {
+    cat:'b2b', catLabel:'B2B и корпоративные',
+    title:'HR-портал для сотрудников',
+    desc:'Заявки на отпуск, справки, обучение, внутренние объявления. Проблема — разрозненность сервисов и понятность процессов.',
+    audience:'Сотрудники средних и крупных компаний',
+    platforms:'Десктоп, смартфон'
+  },
+  {
+    cat:'b2b', catLabel:'B2B и корпоративные',
+    title:'Система документооборота',
+    desc:'Согласование документов, версии, подписи, история. Проблема — отслеживание статуса и ролей.',
+    audience:'Сотрудники, работающие с договорами и внутренними документами',
+    platforms:'Десктоп'
+  },
+  {
+    cat:'b2b', catLabel:'B2B и корпоративные',
+    title:'Панель управления логистикой',
+    desc:'Отслеживание грузов, маршруты, статусы, документы. Проблема — работа с картами и таблицами одновременно.',
+    audience:'Логисты и операторы доставки',
+    platforms:'Десктоп, планшет'
+  },
+  {
+    cat:'industry', catLabel:'Промышленность',
+    title:'Интерфейс умного дома',
+    desc:'Управление устройствами, сценарии, мониторинг. Проблема — понятность для не-технических пользователей.',
+    audience:'Владельцы квартир и домов 28–60 лет',
+    platforms:'Смартфон, планшет'
+  },
+  {
+    cat:'industry', catLabel:'Промышленность',
+    title:'Мониторинг промышленного оборудования',
+    desc:'Показатели датчиков, статусы, аварийные уведомления. Проблема — быстрое считывание критичных данных.',
+    audience:'Операторы и инженеры на производстве',
+    platforms:'Десктоп, планшет'
+  },
+  {
+    cat:'life', catLabel:'Быт и здоровье',
+    title:'Фитнес-трекер и дневник тренировок',
+    desc:'Запись активности, цели, прогресс, статистика. Проблема — регулярность ведения и понятность метрик.',
+    audience:'Люди 20–45 лет, занимающиеся спортом',
+    platforms:'Смартфон, планшет'
+  },
+  {
+    cat:'life', catLabel:'Быт и здоровье',
+    title:'Сервис поиска квартиры',
+    desc:'Каталог, фильтры, карта, связь с собственником. Проблема — доверие к объявлениям и сравнение вариантов.',
+    audience:'Люди 22–45 лет, ищущие жильё',
+    platforms:'Десктоп, смартфон'
+  }
+];
+
+/* ================= РЕНДЕР ТЕМ ================= */
+(function(){
+  const grid = document.getElementById('topicsGrid');
+  const empty = document.getElementById('empty');
+  const counter = document.getElementById('counter');
+  const buttons = document.querySelectorAll('.filter-btn');
+  if(!grid) return;
+
+  let currentCat = 'all';
+
+  function render(){
+    const filtered = currentCat === 'all'
+      ? TOPICS
+      : TOPICS.filter(t => t.cat === currentCat);
+
+    if(filtered.length === 0){
+      grid.innerHTML = '';
+      empty.classList.add('visible');
+      counter.textContent = 'Показано: 0 из ' + TOPICS.length;
+      return;
+    }
+    empty.classList.remove('visible');
+
+    grid.innerHTML = filtered.map((t, i) => {
+      const idx = String(TOPICS.indexOf(t) + 1).padStart(2, '0');
+      return '<article class="topic-card">' +
+        '<div class="top">' +
+          '<span class="num">' + idx + '</span>' +
+          '<span class="cat-tag">' + t.catLabel + '</span>' +
+        '</div>' +
+        '<h3>' + t.title + '</h3>' +
+        '<p class="desc">' + t.desc + '</p>' +
+        '<div class="meta">' +
+          '<div><b>Аудитория</b> ' + t.audience + '</div>' +
+          '<div><b>Платформы</b> ' + t.platforms + '</div>' +
+        '</div>' +
+      '</article>';
+    }).join('');
+
+    counter.textContent = 'Показано: ' + filtered.length +
+      ' из ' + TOPICS.length;
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCat = btn.dataset.cat;
+      render();
+    });
+  });
+
+  render();
+})();
+
+/* ================= REVEAL ================= */
+(function(){
+  const items = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    items.forEach(i => i.classList.add('in'));
+    return;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.06, rootMargin:'0px 0px -30px 0px'});
+  items.forEach(i => io.observe(i));
+})();
+</script>
+
+</body>
+</html>
