@@ -1,0 +1,231 @@
+{
+  "main": {
+    "id": "b93f610da44fe373",
+    "type": "split",
+    "children": [
+      {
+        "id": "eb17096c8eed01bd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "71cf7a52a6fbca9a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Основы алгоритмизации и программирования/Работа со строками и регулярными выражениями в Python.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Работа со строками и регулярными выражениями в Python"
+            }
+          },
+          {
+            "id": "8fcb9a53760aa4eb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Основы алгоритмизации и программирования/Этапы разработки ПО.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Этапы разработки ПО"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "73a2af7ad1fa560a",
+    "type": "split",
+    "children": [
+      {
+        "id": "8f71a3a93de2214a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f62f234f7355768d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Файловый менеджер"
+            }
+          },
+          {
+            "id": "4aebdca80971b14b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Поиск"
+            }
+          },
+          {
+            "id": "2728d3b38b452722",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Закладки"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "right": {
+    "id": "cb1e71be26f2a9e6",
+    "type": "split",
+    "children": [
+      {
+        "id": "f3c9c2e25caa0e62",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b2e22f21d285e8e8",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Основы информационной безопасности/Понятие информационной безопасности.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Обратные ссылки"
+            }
+          },
+          {
+            "id": "49f3a1b395d88fe8",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Основы информационной безопасности/Понятие информационной безопасности.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Исходящие ссылки"
+            }
+          },
+          {
+            "id": "854592aae2c510f5",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Теги"
+            }
+          },
+          {
+            "id": "0b2c087c1b6c0b41",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Все свойства"
+            }
+          },
+          {
+            "id": "8666dc543cee5f66",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Основы информационной безопасности/Понятие информационной безопасности.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Структура"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Меню быстрого перехода": false,
+      "graph:Граф": false,
+      "canvas:Создать новый холст": false,
+      "daily-notes:Сегодняшняя заметка": false,
+      "templates:Вставить шаблон": false,
+      "command-palette:Открыть палитру команд": false,
+      "bases:Создать новую базу": false
+    }
+  },
+  "active": "71cf7a52a6fbca9a",
+  "lastOpenFiles": [
+    "Мои проекты/build/study_widget/EXE-00.toc",
+    "Мои проекты/dist/study_widget.exe",
+    "Мои проекты/build/study_widget/PKG-00.toc",
+    "Мои проекты/build/study_widget/study_widget.pkg",
+    "Мои проекты/build/study_widget/PYZ-00.toc",
+    "Мои проекты/build/study_widget/PYZ-00.pyz",
+    "Мои проекты/build/study_widget/localpycs/pyimod04_pywin32.pyc",
+    "Мои проекты/build/study_widget/localpycs/pyimod03_ctypes.pyc",
+    "Мои проекты/build/study_widget/localpycs/pyimod02_importers.pyc",
+    "Мои проекты/build/study_widget/localpycs/struct.pyc",
+    "Мои проекты/build/study_widget/localpycs/pyimod01_archive.pyc",
+    "Основы алгоритмизации и программирования/Синтаксис языка Python.md",
+    "Основы алгоритмизации и программирования/Реализация циклов в программах на языке Python.md",
+    "Основы алгоритмизации и программирования/Этапы разработки ПО.md",
+    "Основы алгоритмизации и программирования/Работа со строками и регулярными выражениями в Python.md",
+    "Основы алгоритмизации и программирования/Операции_выражения_python.md",
+    "Основы алгоритмизации и программирования/Исторя и классификация языков программирования.md",
+    "Основы алгоритмизации и программирования/Операции_выражения_python.canvas",
+    "Основы информационной безопасности/Понятие информационной безопасности.md",
+    "Проектирование и разработка БД/Проектирование и разработка БД.md",
+    "Основы работы с HTML и CSS/6. Основы HTML. Таблицы.md",
+    "Архитектура аппаратных средств/Комбинационные уст-ва/Комбинационные устройства.md"
+  ]
+}
