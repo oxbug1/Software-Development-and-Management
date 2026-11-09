@@ -4,35 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "eb17096c8eed01bd",
+        "id": "07796db59add0fd7",
         "type": "tabs",
         "children": [
           {
-            "id": "71cf7a52a6fbca9a",
+            "id": "b56b147bf2304858",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Основы алгоритмизации и программирования/Работа со строками и регулярными выражениями в Python.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Работа со строками и регулярными выражениями в Python"
-            }
-          },
-          {
-            "id": "8fcb9a53760aa4eb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Основы алгоритмизации и программирования/Этапы разработки ПО.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Этапы разработки ПО"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Граф"
             }
           }
         ]
@@ -203,23 +185,27 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "71cf7a52a6fbca9a",
+  "active": "b56b147bf2304858",
   "lastOpenFiles": [
-    "Мои проекты/build/study_widget/EXE-00.toc",
-    "Мои проекты/dist/study_widget.exe",
-    "Мои проекты/build/study_widget/PKG-00.toc",
-    "Мои проекты/build/study_widget/study_widget.pkg",
-    "Мои проекты/build/study_widget/PYZ-00.toc",
-    "Мои проекты/build/study_widget/PYZ-00.pyz",
-    "Мои проекты/build/study_widget/localpycs/pyimod04_pywin32.pyc",
-    "Мои проекты/build/study_widget/localpycs/pyimod03_ctypes.pyc",
-    "Мои проекты/build/study_widget/localpycs/pyimod02_importers.pyc",
-    "Мои проекты/build/study_widget/localpycs/struct.pyc",
-    "Мои проекты/build/study_widget/localpycs/pyimod01_archive.pyc",
-    "Основы алгоритмизации и программирования/Синтаксис языка Python.md",
-    "Основы алгоритмизации и программирования/Реализация циклов в программах на языке Python.md",
+    "2026-11-07.md",
+    "Без названия 1.canvas",
+    "Без названия.base",
+    "Без названия.canvas",
+    "Структура отчета о выполнении контрольной.md",
+    "Контрольные работы/ОАиП/telecommunication_service.py",
+    "Контрольные работы/ОАиП/test.py",
+    "Контрольные работы/ОАиП/2_3_ШаблонДляОформленияОтчета.odt",
+    "Контрольные работы/ОАиП",
+    "Контрольные работы/Новая папка",
+    "Контрольные работы/test.py",
+    "Лабораторные работы/ОАиП/test.py",
+    "Лабораторные работы/ОАиП/1_2_8_2.py",
+    "Лабораторные работы/ОАиП/1_2_8_1.py",
+    "Списки, кортежи, множества, перечисления, словари.md",
     "Основы алгоритмизации и программирования/Этапы разработки ПО.md",
     "Основы алгоритмизации и программирования/Работа со строками и регулярными выражениями в Python.md",
+    "Основы алгоритмизации и программирования/Синтаксис языка Python.md",
+    "Основы алгоритмизации и программирования/Реализация циклов в программах на языке Python.md",
     "Основы алгоритмизации и программирования/Операции_выражения_python.md",
     "Основы алгоритмизации и программирования/Исторя и классификация языков программирования.md",
     "Основы алгоритмизации и программирования/Операции_выражения_python.canvas",
